@@ -1,0 +1,5 @@
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\bin\Debug\DAL.dll.config
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\bin\Debug\DAL.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\bin\Debug\DAL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\obj\Debug\DAL.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\obj\Debug\DAL.pdb
