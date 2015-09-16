@@ -1,4 +1,4 @@
-﻿@model TrainBooking.DAL.Entities.Station
+﻿@model TrainBooking.Models.StationViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -11,7 +11,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Station</legend>
+        <legend>StationViewModel</legend>
 
         @Html.HiddenFor(model => model.Id)
 
@@ -21,38 +21,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DepatureDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DepatureDate)
-            @Html.ValidationMessageFor(model => model.DepatureDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DepatureTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DepatureTime)
-            @Html.ValidationMessageFor(model => model.DepatureTime)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ArrivalDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ArrivalDate)
-            @Html.ValidationMessageFor(model => model.ArrivalDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ArrivalTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ArrivalTime)
-            @Html.ValidationMessageFor(model => model.ArrivalTime)
         </div>
 
         <p>

@@ -2,10 +2,11 @@
 using System.Data.Entity;
 using System.Linq;
 using TrainBooking.DAL.Entities;
+using TrainBooking.DAL.Repositories.Interfaces;
 
 namespace TrainBooking.DAL.Repositories
 {
-    public class RouteRepository : Repository
+    public class RouteRepository : Repository, IRouteRepository
     {
         public List<Route> GetRoutes()
         {
@@ -28,6 +29,11 @@ namespace TrainBooking.DAL.Repositories
         {
             db.Entry(route).State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        public RouteRepository(TrainBookingContext context)
+            : base(context)
+        {
         }
     }
 }

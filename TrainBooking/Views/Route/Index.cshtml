@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrainBooking.DAL.Entities.Route>
+﻿@model IEnumerable<TrainBooking.Models.RouteViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -29,6 +29,15 @@
         <th>
             @Html.DisplayNameFor(model => model.ArrivalTime)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartingStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TravelTime)
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +60,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ArrivalTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartingStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TravelTime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

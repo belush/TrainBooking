@@ -13,35 +13,30 @@ namespace TrainBooking.DAL.EntityMetaData
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Номер")]
         public int Number { get; set; }
 
-        [Display(Name = "Название")]
         public string Name { get; set; }
 
-        [Display(Name = "Дата отправления")]
         [DataType(DataType.Date)]
         public DateTime DepatureDate { get; set; }
 
-        [Display(Name = "Время отправления")]
         [DataType(DataType.Time)]
         public TimeSpan DepatureTime { get; set; }
 
-        [Display(Name = "Дата прибытия")]
         [DataType(DataType.Date)]
         public DateTime ArrivalDate { get; set; }
 
-        [Display(Name = "Время прибытия")]
         [DataType(DataType.Time)]
         public TimeSpan ArrivalTime { get; set; }
 
-        [Display(Name = "Начальная станция")]
-        public virtual Station StartingStation { get; set; }
+        public double FullPrice { get; set; }
 
-        [Display(Name = "Конечная станция")]
-        public virtual Station LastStation { get; set; }
+        public virtual StationRoute StartingStation { get; set; }
 
-        [Display(Name = "Промежуточные станции")]
-        public virtual List<Station> WayStations { get; set; }
+        public virtual StationRoute LastStation { get; set; }
+
+        public virtual ICollection<StationRoute> WayStations { get; set; }
+
+        public virtual ICollection<Wagon> Wagons { get; set; }
     }
 }

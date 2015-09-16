@@ -13,39 +13,39 @@ namespace TrainBooking.Models
         [Display(Name = "Название")]
         public string Name { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime DepatureDate { get; set; }
+        //[DataType(DataType.Date)]
+        //public DateTime DepatureDate { get; set; }
 
-        public TimeSpan DepatureTime { get; set; }
+        //public TimeSpan DepatureTime { get; set; }
 
-        public DateTime ArrivalDate { get; set; }
+        //public DateTime ArrivalDate { get; set; }
 
-        public TimeSpan ArrivalTime { get; set; }
+        //public TimeSpan ArrivalTime { get; set; }
 
-        public int TravelDays
-        {
-            get
-            {
-                //ЕЩЕ НУЖНО УЧЕСТЬ ЕСЛИ ДНИ ИЗ РАЗНЫХ МЕСЯЦЕВ, ЛЕТ ...
-                return ArrivalDate.Day - DepatureDate.Day;
-            }
-            set
-            {
-                TravelDays = value;
-            }
-        }
+        //public int TravelDays
+        //{
+        //    get
+        //    {
+        //        //ЕЩЕ НУЖНО УЧЕСТЬ ЕСЛИ ДНИ ИЗ РАЗНЫХ МЕСЯЦЕВ, ЛЕТ ...
+        //        return ArrivalDate.Day - DepatureDate.Day;
+        //    }
+        //    set
+        //    {
+        //        TravelDays = value;
+        //    }
+        //}
 
-        public TimeSpan TravelTime
-        {
-            get
-            {
-                //ЕЩЕ НУЖНО УЧЕСТЬ ЕСЛИ ДНИ ИЗ РАЗНЫХ МЕСЯЦЕВ, ЛЕТ ...
-                return ArrivalTime - DepatureTime;
-            }
-            set
-            {
-                TravelTime = value;
-            }
-        }
+        //public TimeSpan TravelTime
+        //{
+        //    get
+        //    {
+        //        //ЕЩЕ НУЖНО УЧЕСТЬ ЕСЛИ ДНИ ИЗ РАЗНЫХ МЕСЯЦЕВ, ЛЕТ ...
+        //        return ArrivalTime - DepatureTime;
+        //    }
+        //    set
+        //    {
+        //        TravelTime = value;
+        //    }
+        //}
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using TrainBooking.DAL.EntityMetaData;
 
 namespace TrainBooking.DAL.Entities
@@ -9,5 +10,8 @@ namespace TrainBooking.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public int NumberOfPlaces { get; set; }
+        public double Coefficient { get; set; }
+
+        public virtual ICollection<Wagon> Wagons { get; set; }
     }
 }

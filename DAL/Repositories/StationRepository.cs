@@ -2,10 +2,11 @@
 using System.Data.Entity;
 using System.Linq;
 using TrainBooking.DAL.Entities;
+using TrainBooking.DAL.Repositories.Interfaces;
 
 namespace TrainBooking.DAL.Repositories
 {
-    public class StationRepository : Repository
+    public class StationRepository : Repository, IStationRepository
     {
         public List<Station> GetStations()
         {
@@ -28,6 +29,11 @@ namespace TrainBooking.DAL.Repositories
         {
             db.Entry(station).State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        public StationRepository(TrainBookingContext context)
+            : base(context)
+        {
         }
     }
 }

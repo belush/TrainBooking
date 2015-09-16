@@ -12,10 +12,11 @@ namespace TrainBooking.DAL.EntityMetaData
     {
         [Key]
         public int Id { get; set; }
+
         public int Number { get; set; }
-        public double Price { get; set; }
 
         public WagonType WagonType { get; set; }
-        public List<Place> Places { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

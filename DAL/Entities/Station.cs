@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TrainBooking.DAL.EntityMetaData;
 
@@ -9,9 +10,7 @@ namespace TrainBooking.DAL.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime DepatureDate { get; set; }
-        public TimeSpan DepatureTime { get; set; }
-        public DateTime ArrivalDate { get; set; }
-        public TimeSpan ArrivalTime { get; set; }
+
+        public virtual ICollection<StationRoute> StationRoutes { get; set; }
     }
 }

@@ -14,24 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepatureDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepatureTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TravelDays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TravelTime)
-        </th>
         <th></th>
     </tr>
 
@@ -39,24 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepatureDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepatureTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TravelDays)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TravelTime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
