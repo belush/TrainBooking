@@ -61,28 +61,27 @@
             @Html.ValidationMessageFor(model => model.ArrivalTime)
         </div>
 
-@*        <div class="editor-label">*@
-@*            @Html.LabelFor(model => model.StartingStation)*@
-@*        </div>*@
-@*        <div class="editor-field">*@
-@*            @Html.EditorFor(model => model.StartingStation)*@
-@*            @Html.ValidationMessageFor(model => model.StartingStation)*@
-@*        </div>*@
-
         <div class="editor-label">
             @Html.LabelFor(model => model.StartingStation)
         </div>
+        @*<div class="editor-field">
+            @Html.EditorFor(model => model.StartingStation)
+            @Html.ValidationMessageFor(model => model.StartingStation)
+        </div>*@
         <div class="editor-field">
             @Html.DropDownListFor(model => model.StartingStation, ViewData["stations"] as List<SelectListItem>)
             @Html.ValidationMessageFor(model => model.StartingStation)
         </div>
 
-
         <div class="editor-label">
             @Html.LabelFor(model => model.LastStation)
         </div>
-        <div class="editor-field">
+        @*<div class="editor-field">
             @Html.EditorFor(model => model.LastStation)
+            @Html.ValidationMessageFor(model => model.LastStation)
+        </div>*@
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.LastStation, ViewData["stations"] as List<SelectListItem>)
             @Html.ValidationMessageFor(model => model.LastStation)
         </div>
 

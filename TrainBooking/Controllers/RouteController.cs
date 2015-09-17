@@ -16,47 +16,37 @@ namespace TrainBooking.Controllers
 {
     public class RouteController : Controller
     {
-        private IRouteLogic logic;
-
-        private readonly IStationLogic stationLogic;
-        private readonly IStationRouteLogic stationRoteLogic;
+        private readonly IRouteLogic _routeLogic;
+        private readonly IStationLogic _stationLogic;
+        private readonly IStationRouteLogic _stationRouteLogic;
 
         public RouteController()
         {
             var context = new TrainBookingContext();
 
-            logic = new RouteLogic(new RouteRepository(context));
-            stationLogic = new StationLogic(new StationRepository(context));
-            stationRoteLogic = new StationRouteLogic(new StationRouteRepository(context));
+            _routeLogic = new RouteLogic(new RouteRepository(context));
+            _stationLogic = new StationLogic(new StationRepository(context));
+            _stationRouteLogic = new StationRouteLogic(new StationRouteRepository(context));
         }
 
-        public List<SelectListItem> GetStationsListItems()
-        {
-            List<SelectListItem> stationsListItems = stationLogic.GetStationsList().
-                Select(s => new SelectListItem()
-                {
-                    Text = s.Name,
-                    Value = s.Id.ToString()
-                }).ToList();
 
-            return stationsListItems;
-        }
 
         public ActionResult Index()
         {
-            List<Route> routes = logic.GetRoutesList();
+            List<Route> routes = _routeLogic.GetRoutesList();
+            StationRoute first = _stationRouteLogic.GetStationRouteById(8);
+            StationRoute second = _stationRouteLogic.GetStationRouteById(9);
 
             List<RouteViewModel> routeViewModels = routes.Select(r => new RouteViewModel()
             {
                 Id = r.Id,
                 Name = r.Name,
                 Number = r.Number,
-                DepatureDate = r.DepatureDate,
-                DepatureTime = r.DepatureTime,
-                ArrivalDate = r.ArrivalDate,
-                ArrivalTime = r.ArrivalTime,
-                StartingStation=r.StartingStation.Station.Id,
-                LastStation = r.LastStation.Station.Id
+                DepatureDateTime = r.DepatureDateTime,
+                ArrivalDateTime = r.ArrivalDateTime,
+                StartingStation = r.StartingStation.Station.Name,
+                LastStation = r.LastStation.Station.Name,
+                WayStations = r.WayStations.ToList()
             }).ToList();
 
             return View(routeViewModels);
@@ -64,12 +54,12 @@ namespace TrainBooking.Controllers
 
         public ActionResult Create()
         {
-            ViewData["stations"] = GetStationsListItems();
+            ViewData["stations"] = _stationLogic.GetStationsList();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(RouteViewModel routeViewModel)
+        public ActionResult Create(RouteAddViewModel routeAddViewModel)
         {
             #region
             //
@@ -82,42 +72,52 @@ namespace TrainBooking.Controllers
             #endregion
             //            try
             //            {
-            var start = stationLogic.GetStationById(routeViewModel.StartingStation);
-            var last = stationLogic.GetStationById(routeViewModel.LastStation);
+            var start = _stationLogic.GetStationById(routeAddViewModel.StartingStation);
+            var last = _stationLogic.GetStationById(routeAddViewModel.LastStation);
 
             StationRoute startingStation = new StationRoute
             {
-                ArrivalDate = routeViewModel.ArrivalDate,
-                ArrivalTime = routeViewModel.ArrivalTime,
-                DepatureDate = routeViewModel.DepatureDate,
-                DepatureTime = routeViewModel.DepatureTime,
+                ArrivalDateTime = routeAddViewModel.ArrivalDate.AddHours(routeAddViewModel.ArrivalTime.Hours)
+                .AddMinutes(routeAddViewModel.ArrivalTime.Minutes),
+                DepatureDateTime = routeAddViewModel.DepatureDate.AddHours(routeAddViewModel.DepatureTime.Hours)
+                .AddMinutes(routeAddViewModel.DepatureTime.Minutes),
                 Station = start
             };
             StationRoute lastStation = new StationRoute
             {
-                ArrivalDate = routeViewModel.ArrivalDate,
-                ArrivalTime = routeViewModel.ArrivalTime,
-                DepatureDate = routeViewModel.DepatureDate,
-                DepatureTime = routeViewModel.DepatureTime,
+                ArrivalDateTime = routeAddViewModel.ArrivalDate.AddHours(routeAddViewModel.ArrivalTime.Hours)
+               .AddMinutes(routeAddViewModel.ArrivalTime.Minutes),
+                DepatureDateTime = routeAddViewModel.DepatureDate.AddHours(routeAddViewModel.DepatureTime.Hours)
+                .AddMinutes(routeAddViewModel.DepatureTime.Minutes),
                 Station = last
             };
 
-
-
             Route route = new Route();
-            route.Id = routeViewModel.Id;
-            route.Name = routeViewModel.Name;
-            route.Number = routeViewModel.Number;
+            route.Id = routeAddViewModel.Id;
+            route.Name = routeAddViewModel.Name;
+            route.Number = routeAddViewModel.Number;
             route.StartingStation = startingStation;
             route.LastStation = lastStation;
+            route.DepatureDateTime =
+                routeAddViewModel.DepatureDate.AddHours(routeAddViewModel.DepatureTime.Hours)
+                    .AddMinutes(routeAddViewModel.DepatureTime.Minutes);
+            route.ArrivalDateTime =
+                routeAddViewModel.ArrivalDate.AddHours(routeAddViewModel.ArrivalTime.Hours)
+                    .AddMinutes(routeAddViewModel.ArrivalTime.Minutes);
 
-            route.DepatureDate = routeViewModel.DepatureDate;
-            route.DepatureTime = routeViewModel.DepatureTime;
-            route.ArrivalTime = routeViewModel.ArrivalTime;
-            route.ArrivalDate = routeViewModel.ArrivalDate;
+            _routeLogic.AddRoute(route);
 
+            //ПРИСВАИВАНИЕ МАРШРУТОВ
+            //int idStartingStation = startingStation.Id;
+            //int idLastStation = lastStation.Id;
 
-            logic.AddRoute(route);
+            //StationRoute stationRouteStart = _stationRouteLogic.GetStationRouteById(idStartingStation);
+            //startingStation.Route = route;
+            //_stationRouteLogic.EditStationRoute(stationRouteStart);
+
+            //StationRoute stationRouteLast = _stationRouteLogic.GetStationRouteById(idLastStation);
+            //lastStation.Route = route;
+            //_stationRouteLogic.EditStationRoute(stationRouteLast);
 
             return RedirectToAction("Index");
 
@@ -130,27 +130,104 @@ namespace TrainBooking.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            ViewData["stations"] = _stationLogic.GetStationsListItems();
+
+            Route route = _routeLogic.GetRouteById(id);
+            RouteAddViewModel routeEditViewModel = new RouteAddViewModel();
+            routeEditViewModel.Id = route.Id;
+            routeEditViewModel.Name = route.Name;
+            routeEditViewModel.Number = route.Number;
+            routeEditViewModel.StartingStationRoute = route.StartingStation.Id;
+            routeEditViewModel.LastStationRoute = route.LastStation.Id;
+            routeEditViewModel.StartingStation = route.StartingStation.Station.Id;
+            routeEditViewModel.LastStation = route.LastStation.Station.Id;
+            routeEditViewModel.DepatureDate = route.DepatureDateTime.Date;
+            routeEditViewModel.DepatureTime = new TimeSpan(0, route.DepatureDateTime.Hour, route.DepatureDateTime.Minute, 0);
+            routeEditViewModel.ArrivalDate = route.ArrivalDateTime;
+            routeEditViewModel.ArrivalTime = new TimeSpan(0, route.ArrivalDateTime.Hour, route.ArrivalDateTime.Minute, 0);
+            return View(routeEditViewModel);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, RouteAddViewModel routeEditViewModel)
         {
-            try
-            {
-                // TODO: Add update logic here
+            //try
+            //{
+            var start = _stationLogic.GetStationById(routeEditViewModel.StartingStation);
+            var last = _stationLogic.GetStationById(routeEditViewModel.LastStation);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            StationRoute startingStation = _stationRouteLogic.GetStationRouteById(routeEditViewModel.StartingStationRoute);
+            startingStation.Station = start;
+
+            StationRoute lastStation = _stationRouteLogic.GetStationRouteById(routeEditViewModel.LastStationRoute);
+            lastStation.Station = last;
+
+            Route route = new Route();
+            route.Id = routeEditViewModel.Id;
+            route.Name = routeEditViewModel.Name;
+            route.Number = routeEditViewModel.Number;
+            route.StartingStation = startingStation;
+            route.LastStation = lastStation;
+
+            route.DepatureDateTime =
+                routeEditViewModel.DepatureDate.AddHours(routeEditViewModel.DepatureTime.Hours)
+                    .AddMinutes(routeEditViewModel.DepatureTime.Minutes);
+            route.ArrivalDateTime =
+                routeEditViewModel.ArrivalDate.AddHours(routeEditViewModel.ArrivalTime.Hours)
+                    .AddMinutes(routeEditViewModel.ArrivalTime.Minutes);
+
+
+            _routeLogic.EditRoute(route);
+
+            return RedirectToAction("Index");
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
+        }
+
+
+        public ActionResult AddWay(int id)
+        {
+            StationRouteAddViewModel stationRouteAddViewModel = new StationRouteAddViewModel();
+            stationRouteAddViewModel.RouteId = id;
+
+            ViewData["stations"] = _stationLogic.GetStationsListItems();
+            return View(stationRouteAddViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddWay(StationRouteAddViewModel stationRouteAddViewModel)
+        {
+            //try
+            //{
+            StationRoute stationRoute = new StationRoute();
+            Station station = _stationLogic.GetStationById(stationRouteAddViewModel.StationId);
+            Route route = _routeLogic.GetRouteById(stationRouteAddViewModel.RouteId);
+
+            stationRoute.Id = stationRouteAddViewModel.Id;
+            stationRoute.Station = station;
+            //stationRoute.Route = route;
+            stationRoute.DepatureDateTime = stationRouteAddViewModel.DepatureDate
+                .Add(stationRouteAddViewModel.DepatureTime);
+            stationRoute.ArrivalDateTime = stationRouteAddViewModel.ArrivalDate
+                .Add(stationRouteAddViewModel.ArrivalTime);
+            route.WayStations.Add(stationRoute);
+            _routeLogic.EditRoute(route);
+
+            return RedirectToAction("Index");
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         public ActionResult Delete(int id)
         {
-            return View();
+            Route route = _routeLogic.GetRouteById(id);
+            return View(route);
         }
 
         [HttpPost]
@@ -158,7 +235,7 @@ namespace TrainBooking.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                _routeLogic.DeleteRouteById(id);
 
                 return RedirectToAction("Index");
             }

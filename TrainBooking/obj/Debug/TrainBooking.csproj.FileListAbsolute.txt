@@ -11,6 +11,7 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\Train
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\DotNetOpenAuth.OpenId.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\EntityFramework.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\EntityFramework.SqlServer.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\Microsoft.Data.Edm.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\Microsoft.Data.OData.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\Microsoft.Web.Infrastructure.dll
@@ -32,9 +33,10 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\Train
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\BL.pdb
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\DAL.pdb
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\EntityFramework.xml
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\EntityFramework.SqlServer.xml
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Web.Mvc.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\Newtonsoft.Json.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Web.Helpers.xml
-C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Web.Mvc.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Web.Razor.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Web.WebPages.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Web.WebPages.Deployment.xml
@@ -52,6 +54,7 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\Train
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\Microsoft.Data.Edm.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\Microsoft.Data.OData.xml
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\System.Spatial.xml
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\ru\System.Web.Mvc.resources.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\ru\WebMatrix.Data.resources.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\de\Microsoft.Data.Edm.resources.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\es\Microsoft.Data.Edm.resources.dll
@@ -83,5 +86,3 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\Train
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\obj\Debug\TrainBooking.csprojResolveAssemblyReference.cache
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\obj\Debug\TrainBooking.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\obj\Debug\TrainBooking.pdb
-C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\EntityFramework.SqlServer.dll
-C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\TrainBooking\bin\EntityFramework.SqlServer.xml

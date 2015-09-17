@@ -14,7 +14,7 @@ namespace TrainBooking.Models
         public string Name { get; set; }
 
         //[DataType(DataType.Date)]
-        //public DateTime DepatureDate { get; set; }
+        //public DateTime DepatureDateTime { get; set; }
 
         //public TimeSpan DepatureTime { get; set; }
 
@@ -27,7 +27,7 @@ namespace TrainBooking.Models
         //    get
         //    {
         //        //ЕЩЕ НУЖНО УЧЕСТЬ ЕСЛИ ДНИ ИЗ РАЗНЫХ МЕСЯЦЕВ, ЛЕТ ...
-        //        return ArrivalDate.Day - DepatureDate.Day;
+        //        return ArrivalDate.Day - DepatureDateTime.Day;
         //    }
         //    set
         //    {

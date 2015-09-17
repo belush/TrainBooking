@@ -1,4 +1,4 @@
-﻿@model TrainBooking.DAL.Entities.StationRoute
+﻿@model TrainBooking.DAL.Entities.Station
 
 @{
     ViewBag.Title = "Delete";
@@ -11,38 +11,10 @@
     <legend>Station</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Station.Name)
+         @Html.DisplayNameFor(model => model.Name)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Station.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DepatureDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DepatureDate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DepatureTime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DepatureTime)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ArrivalDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ArrivalDate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ArrivalTime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ArrivalTime)
+        @Html.DisplayFor(model => model.Name)
     </div>
 </fieldset>
 @using (Html.BeginForm()) {

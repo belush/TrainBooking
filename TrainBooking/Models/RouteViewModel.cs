@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using TrainBooking.DAL.Entities;
 
 namespace TrainBooking.Models
 {
@@ -16,30 +17,41 @@ namespace TrainBooking.Models
         [Display(Name = "Название")]
         public string Name { get; set; }
 
-        [Display(Name = "Дата отправления")]
-        [DataType(DataType.Date)]
-        public DateTime DepatureDate { get; set; }
+        //[Display(Name = "Дата отправления")]
+        //[DataType(DataType.Date)]
+        //public DateTime DepatureDateTime { get; set; }
 
-        [Display(Name = "Время отправления")]
-        [DataType(DataType.Time)]
-        public TimeSpan DepatureTime { get; set; }
+        //[Display(Name = "Время отправления")]
+        //[DataType(DataType.Time)]
 
-        [Display(Name = "Дата прибытия")]
-        [DataType(DataType.Date)]
-        public DateTime ArrivalDate { get; set; }
+        [Display(Name = "Отправление")]
+        [DataType(DataType.DateTime)]
 
-        [Display(Name = "Время прибытия")]
-        [DataType(DataType.Time)]
-        public TimeSpan ArrivalTime { get; set; }
+        public DateTime DepatureDateTime { get; set; }
+
+        //[Display(Name = "Дата прибытия")]
+        //[DataType(DataType.Date)]
+        //public DateTime ArrivalDate { get; set; }
+
+        //[Display(Name = "Время прибытия")]
+        //[DataType(DataType.Time)]
+        //public TimeSpan ArrivalTime { get; set; }
+
+        [Display(Name = "Прибытие")]
+        [DataType(DataType.DateTime)]
+        public DateTime ArrivalDateTime { get; set; }
 
         [Display(Name = "Начальная станция")]
-        public int StartingStation { get; set; }
+        public string StartingStation { get; set; }
 
         [Display(Name = "Конечная станция")]
-        public int LastStation { get; set; }
+        public string LastStation { get; set; }
 
         [Display(Name = "Промежуточные станции")]
         public List<int> WayStationIds { get; set; }
+
+        [Display(Name = "Промежуточные станции")]
+        public List<StationRoute> WayStations { get; set; }
 
         //[Display(Name = "Название")]
         //public int TravelDays
@@ -47,7 +59,7 @@ namespace TrainBooking.Models
         //    get
         //    {
         //        //ЕЩЕ НУЖНО УЧЕСТЬ ЕСЛИ ДНИ ИЗ РАЗНЫХ МЕСЯЦЕВ, ЛЕТ ...
-        //        return ArrivalDate.Day - DepatureDate.Day;
+        //        return ArrivalDate.Day - DepatureDateTime.Day;
         //    }
         //    set
         //    {
@@ -61,8 +73,12 @@ namespace TrainBooking.Models
         {
             get
             {
-                int travelDays = ArrivalDate.Day - DepatureDate.Day;
-                TimeSpan travelTime = ArrivalTime - DepatureTime;
+                int travelDays = ArrivalDateTime.Day - DepatureDateTime.Day;
+                TimeSpan time = new TimeSpan(0, DepatureDateTime.Hour, DepatureDateTime.Minute,
+                    DepatureDateTime.Second);
+                //TimeSpan travelTime = ArrivalTime - time;
+
+                TimeSpan travelTime = ArrivalDateTime - DepatureDateTime;
 
                 if (travelDays > 0)
                 {
@@ -81,10 +97,10 @@ namespace TrainBooking.Models
             }
         }
 
-        [Display(Name = "Начальная станция")]
-        public string StartingStationName { get; set; }
+        //[Display(Name = "Начальная станция")]
+        //public string StartingStationName { get; set; }
 
-        [Display(Name = "Конечная станция")]
-        public string LastStationName { get; set; }
+        //[Display(Name = "Конечная станция")]
+        //public string LastStationName { get; set; }
     }
 }

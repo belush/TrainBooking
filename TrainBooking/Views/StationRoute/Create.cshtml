@@ -1,0 +1,78 @@
+﻿@model TrainBooking.Models.StationRouteAddViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>StationRouteAddViewModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StationId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StationId)
+            @Html.ValidationMessageFor(model => model.StationId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepatureDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepatureDate)
+            @Html.ValidationMessageFor(model => model.DepatureDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepatureTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepatureTime)
+            @Html.ValidationMessageFor(model => model.DepatureTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ArrivalDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ArrivalDate)
+            @Html.ValidationMessageFor(model => model.ArrivalDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ArrivalTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ArrivalTime)
+            @Html.ValidationMessageFor(model => model.ArrivalTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RouteId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RouteId)
+            @Html.ValidationMessageFor(model => model.RouteId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

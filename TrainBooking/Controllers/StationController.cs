@@ -15,8 +15,6 @@ namespace TrainBooking.Controllers
 {
     public class StationController : Controller
     {
-        //StationLogic logic = new StationLogic();
-
         private readonly IStationLogic logic;
 
         public StationController()
@@ -109,7 +107,7 @@ namespace TrainBooking.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            return  View();
         }
     }
 }
