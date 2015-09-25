@@ -15,18 +15,23 @@ namespace TrainBooking.ValidationAttributes
     public class UniqueRouteNumberAttribute : ValidationAttribute
     {
         private readonly IRouteLogic _routeLogic;
+        public string RouteId { get; set; }
 
-        public UniqueRouteNumberAttribute()
+        public UniqueRouteNumberAttribute(string routeId)
         {
             var context = new TrainBookingContext();
             _routeLogic = new RouteLogic(new RouteRepository(context));
+
+            RouteId = routeId;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             int thisRouteNumber = (int)value;
 
-            bool isNumberRepeat = _routeLogic.GetRoutesList().Any(r => r.Number == thisRouteNumber);
+            int routeId = (int)validationContext.ObjectType.GetProperty(RouteId).GetValue(validationContext.ObjectInstance, null);
+
+            bool isNumberRepeat = _routeLogic.GetRoutesList().Where(r=>r.Id!=routeId).Any(r => r.Number == thisRouteNumber);
 
             if (isNumberRepeat)
             {

@@ -13,7 +13,7 @@ namespace TrainBooking.Models.RouteModels
         [Required]
         [Range(1, int.MaxValue)]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Введите целое число")]
-        [UniqueRouteNumber()]
+        [UniqueRouteNumber("Id")]
         [Display(Name = "Номер")]
         public int Number { get; set; }
 

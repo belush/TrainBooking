@@ -6,9 +6,13 @@
 
 <h2>Станции</h2>
 
-<p>
-    @Html.ActionLink("Создать", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Создать", "Create")
+    </p>
+}
+
 <table>
     <tr>
         <th>

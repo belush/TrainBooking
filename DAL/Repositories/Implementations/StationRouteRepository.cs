@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories.Interfaces;
@@ -27,10 +28,13 @@ namespace TrainBooking.DAL.Repositories.Implementations
 
         public void EditStationRoute(StationRoute stationRoute)
         {
-            //db.Entry(stationRoute).State = EntityState.Modified;
-            //db.SaveChanges();
+            db.Entry(stationRoute).State = EntityState.Modified;
+            db.SaveChanges();
             //TODO:!
 
+
+
+            //TODO: todo list
             //
             //db.Entry(stationRoute).State = EntityState.Modified;
 
@@ -52,7 +56,8 @@ namespace TrainBooking.DAL.Repositories.Implementations
             //    }
 
             //} while (saveFailed); 
-            throw new NotImplementedException();
+
+            //throw new NotImplementedException();
         }
 
         public StationRouteRepository(TrainBookingContext context)

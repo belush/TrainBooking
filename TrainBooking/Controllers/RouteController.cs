@@ -65,6 +65,8 @@ namespace TrainBooking.Controllers
                 WayStations = r.WayStations.ToList(),
                 //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()
                 //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum() - tickets.Where(t => t.Wagon.Route.Id == r.Id).Select(t => t.PlaceNumber).Count()
+                
+                //ПРОВЕРИТЬ НА НОРМАЛЬНОСТЬ!!!!
                 EmptyPlaces = _routeLogic.GetEmptyPlacesCount(r, tickets)
             }).ToList();
 
@@ -187,7 +189,7 @@ namespace TrainBooking.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, RouteAddViewModel routeEditViewModel)
+        public ActionResult Edit(RouteAddViewModel routeEditViewModel)
         {
             if (!ModelState.IsValid)
             {

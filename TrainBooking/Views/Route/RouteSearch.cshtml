@@ -72,12 +72,15 @@
                 <td>
                     @if (User.IsInRole("Admin"))
                     {
-                         @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})<br/>
-                        @Html.ActionLink("Удалить", "Delete", new {id = item.Id})<br/>
                         @Html.ActionLink("Добавить станцию", "AddWay", new {id = item.Id})<br/>
-                        @Html.ActionLink("Добавить вагоны", "AddWagons", new {id = item.Id}) <br/>
+                        @Html.ActionLink("Добавить вагоны", "AddWagons", new {id = item.Id})<br />
+                         @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })<br />
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })<br />
                     }
-                    @Html.ActionLink("Купить билет", "Index", "Wagon", new {id = item.Id}, null)
+                    @if (User.IsInRole("User"))
+                    {
+                        @Html.ActionLink("Купить билет", "Index", "Wagon", new {id = item.Id}, null)
+                    }
                 </td>
             </tr>
             if (item.WayStations != null)
