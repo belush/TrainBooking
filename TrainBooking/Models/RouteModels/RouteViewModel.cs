@@ -10,7 +10,7 @@ namespace TrainBooking.Models.RouteModels
     {
         public int Id { get; set; }
 
-        [Display(Name = "Номер")]
+        [Display(Name = "№")]
         public int Number { get; set; }
 
         [Display(Name = "Название")]
@@ -24,10 +24,10 @@ namespace TrainBooking.Models.RouteModels
         [DataType(DataType.DateTime)]
         public DateTime ArrivalDateTime { get; set; }
 
-        [Display(Name = "Начальная станция")]
+        [Display(Name = "Откуда")]
         public string StartingStation { get; set; }
 
-        [Display(Name = "Конечная станция")]
+        [Display(Name = "Куда")]
         public string LastStation { get; set; }
 
         [Display(Name = "Промежуточные станции")]
@@ -39,7 +39,7 @@ namespace TrainBooking.Models.RouteModels
         [Display(Name = "Цена")]
         public double Price { get; set; }
 
-        [Display(Name = "Время в пути")]
+        [Display(Name = "В пути")]
         public string TravelTime
         {
             get
@@ -62,13 +62,7 @@ namespace TrainBooking.Models.RouteModels
             }
         }
 
-        [Display(Name = "Билеты")]
+        [Display(Name = "Свободные билеты")]
         public int EmptyPlaces { get; set; }
-
-        //[Display(Name = "Начальная станция")]
-        //public string StartingStationName { get; set; }
-
-        //[Display(Name = "Конечная станция")]
-        //public string LastStationName { get; set; }
     }
 }

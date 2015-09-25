@@ -16,5 +16,6 @@ namespace TrainBooking.BL.Logic.Interfaces
         void DeleteRoute(Route route);
         void EditRoute(Route route);
         List<Route> RouteSearch(string startingStationName, string lastStationName, DateTime? startingDateTime);
+        int GetEmptyPlacesCount(Route route, List<Ticket> tickets);
     }
 }

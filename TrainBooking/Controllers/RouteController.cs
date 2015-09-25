@@ -27,6 +27,7 @@ namespace TrainBooking.Controllers
         private readonly IStationLogic _stationLogic;
         private readonly IStationRouteLogic _stationRouteLogic;
         private readonly IWagonTypeLogic _wagonTypeLogic;
+        private readonly ITicketLogic _ticketLogic;
 
         public RouteController()
         {
@@ -36,6 +37,7 @@ namespace TrainBooking.Controllers
             _stationLogic = new StationLogic(new StationRepository(context));
             _stationRouteLogic = new StationRouteLogic(new StationRouteRepository(context));
             _wagonTypeLogic = new WagonTypeLogic(new WagonTypeRepository(context));
+            _ticketLogic = new TicketLogic(new TicketRepository(context));
         }
 
         [AllowAnonymous]
@@ -49,6 +51,8 @@ namespace TrainBooking.Controllers
                 return PartialView();
             }
 
+            List<Ticket> tickets = _ticketLogic.GetTicketsList();
+
             List<RouteViewModel> routeViewModels = routes.Select(r => new RouteViewModel
             {
                 Id = r.Id,
@@ -59,7 +63,9 @@ namespace TrainBooking.Controllers
                 StartingStation = r.StartingStation.Station.Name,
                 LastStation = r.LastStation.Station.Name,
                 WayStations = r.WayStations.ToList(),
-                EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()
+                //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()
+                //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum() - tickets.Where(t => t.Wagon.Route.Id == r.Id).Select(t => t.PlaceNumber).Count()
+                EmptyPlaces = _routeLogic.GetEmptyPlacesCount(r, tickets)
             }).ToList();
 
             return PartialView(routeViewModels);

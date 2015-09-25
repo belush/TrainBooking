@@ -139,5 +139,13 @@ namespace TrainBooking.BL.Logic.Implementations
 
             return routes;
         }
+
+        public int GetEmptyPlacesCount(Route route, List<Ticket> tickets)
+        {
+            //emptyPlacesCount = all places count - buzy places count 
+            int emptyPlacesCount = route.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum() -
+                                   tickets.Where(t => t.Wagon.Route.Id == route.Id).Select(t => t.PlaceNumber).Count();
+            return emptyPlacesCount;
+        }
     }
 }

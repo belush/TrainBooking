@@ -90,7 +90,7 @@ namespace TrainBooking.Controllers
             }).ToList();
 
             List<Ticket> tickets = _ticketLogic.GetTicketsList();
-            
+
             //tickets = tickets.Where(t => t.StartingStationRoute == startingStationId).ToList();
             //tickets = tickets.Where(t => (t.StartingStationRoute == startingStationId)
             //    && (t.LastStationRoute == lastStationId)).ToList();
@@ -106,7 +106,7 @@ namespace TrainBooking.Controllers
             //        t =>
             //            (_stationRouteLogic.GetStationRouteById(t.LastStationRoute).Station.Id == lastStationId))
             //        .ToList();
-               
+
 
             foreach (WagonViewModel wagonViewModel in wagonViewModels)
             {
@@ -148,9 +148,7 @@ namespace TrainBooking.Controllers
                 Price = _wagonLogic.GetPrice(wagon, null, null),
                 RouteNumber = route.Number,
                 WagonId = wagon.Id,
-                //StartingStationRoute.Id вместо StartingStationRoute.Station.Id
                 StartingStationRouteId = route.StartingStation.Id,
-                //StartingStationRoute.Id вместо StartingStationRoute.Station.Id
                 LastStationRouteId = route.LastStation.Id,
                 StartingStationId = route.StartingStation.Station.Id,
                 LastStationId = route.LastStation.Station.Id,
