@@ -15,6 +15,6 @@ namespace TrainBooking.BL.Logic.Interfaces
         void AddRoute(Route route);
         void DeleteRoute(Route route);
         void EditRoute(Route route);
-        List<Route> FindRoute(Station startingStaion, Station lastStaion);
+        List<Route> RouteSearch(string startingStationName, string lastStationName, DateTime? startingDateTime);
     }
 }

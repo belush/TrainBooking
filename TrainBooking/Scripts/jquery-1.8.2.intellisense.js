@@ -177,7 +177,7 @@ intellisense.annotate(jQuery, {
   },
   'inArray': function() {
     /// <signature>
-    ///   <summary>Search for a specified value within an array and return its index (or -1 if not found).</summary>
+    ///   <summary>RouteChoose for a specified value within an array and return its index (or -1 if not found).</summary>
     ///   <param name="value" type="Object">The value to search for.</param>
     ///   <param name="array" type="Array">An array through which to search.</param>
     ///   <param name="fromIndex" type="Number">The index of the array at which to begin the search. The default is 0, which will search the whole array.</param>
@@ -1441,12 +1441,12 @@ intellisense.annotate(jQuery.fn, {
   },
   'index': function() {
     /// <signature>
-    ///   <summary>Search for a given element from among the matched elements.</summary>
+    ///   <summary>RouteChoose for a given element from among the matched elements.</summary>
     ///   <param name="selector" type="String">A selector representing a jQuery collection in which to look for an element.</param>
     ///   <returns type="Number" />
     /// </signature>
     /// <signature>
-    ///   <summary>Search for a given element from among the matched elements.</summary>
+    ///   <summary>RouteChoose for a given element from among the matched elements.</summary>
     ///   <param name="element" type="jQuery">The DOM element or first element within the jQuery object to look for.</param>
     ///   <returns type="Number" />
     /// </signature>

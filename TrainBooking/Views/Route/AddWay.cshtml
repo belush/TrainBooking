@@ -1,10 +1,10 @@
-﻿@model TrainBooking.Models.StationRouteAddViewModel
+﻿@model TrainBooking.Models.StationRouteModels.StationRouteAddViewModel
 
 @{
     ViewBag.Title = "AddWay";
 }
 
-<h2>AddWay</h2>
+<h2>Добавление промежуточной станции</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -20,7 +20,7 @@
         </div>
         <div class="editor-field">
             @*@Html.EditorFor(model => model.StationId)*@
-            @Html.DropDownListFor(model => model.StationId, ViewData["stations"] as List<SelectListItem>)
+            @Html.DropDownListFor(model => model.StationId, Model.StationsListItems)
             @Html.ValidationMessageFor(model => model.StationId)
         </div>
 
@@ -57,7 +57,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.RouteId)
+            @*@Html.LabelFor(model => model.RouteId)*@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.RouteId)
@@ -65,13 +65,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Добавить" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад", "Index")
 </div>
 
 @section Scripts {

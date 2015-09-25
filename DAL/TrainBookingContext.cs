@@ -16,5 +16,6 @@ namespace TrainBooking.DAL
         public DbSet<StationRoute> StationRoutes { get; set; }
         public DbSet<Wagon> Wagons { get; set; }
         public DbSet<WagonType> WagonTypes { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories.Interfaces;
 
-namespace TrainBooking.DAL.Repositories
+namespace TrainBooking.DAL.Repositories.Implementations
 {
     public class StationRepository : Repository, IStationRepository
     {

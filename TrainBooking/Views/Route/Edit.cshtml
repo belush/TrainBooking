@@ -1,10 +1,10 @@
-﻿@model TrainBooking.Models.RouteAddViewModel
+﻿@model TrainBooking.Models.RouteModels.RouteAddViewModel
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Редактирование</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -37,7 +37,11 @@
         <div class="editor-field">
             @*@Html.EditorFor(model => model.DepatureDate)*@
             @*@Html.TextBoxFor(model => model.DepatureDate)*@
-            @Html.EditorFor(m => m.DepatureDate, "{0:dd.MM.yyyy}")
+            @*@Html.EditorFor(m => m.DepatureDate)*@
+            <input class="text-box single-line" data-val="true"
+                   data-val-date="Поле Дата отправления должно содержать дату."
+                   data-val-required="Требуется поле Дата отправления." id="DepatureDate"
+                   name="DepatureDate" type="date" value="@Model.DepatureDate.ToString("yyyy-MM-dd")">
             @Html.ValidationMessageFor(model => model.DepatureDate)
         </div>
 
@@ -53,7 +57,11 @@
             @Html.LabelFor(model => model.ArrivalDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ArrivalDate)
+            @*@Html.EditorFor(model => model.ArrivalDate)*@
+            <input class="text-box single-line" data-val="true"
+                   data-val-date="Поле Дата прибытия должно содержать дату."
+                   data-val-required="Требуется поле Дата прибытия." id="ArrivalDate"
+                   name="ArrivalDate" type="date" value="@Model.ArrivalDate.ToString("yyyy-MM-dd")">
             @Html.ValidationMessageFor(model => model.ArrivalDate)
         </div>
 
@@ -69,8 +77,8 @@
             @Html.LabelFor(model => model.StartingStation)
         </div>
         <div class="editor-field">
-            @*@Html.EditorFor(model => model.StartingStation)*@
-            @Html.DropDownListFor(model => model.StartingStation, ViewData["stations"] as List<SelectListItem>)
+            @*@Html.EditorFor(model => model.StartingStationRoute)*@
+            @Html.DropDownListFor(model => model.StartingStation, Model.StationsListItems)
             @Html.ValidationMessageFor(model => model.StartingStation)
         </div>
 
@@ -78,8 +86,8 @@
             @Html.LabelFor(model => model.LastStation)
         </div>
         <div class="editor-field">
-            @*@Html.EditorFor(model => model.LastStation)*@
-            @Html.DropDownListFor(model => model.LastStation, ViewData["stations"] as List<SelectListItem>)
+            @*@Html.EditorFor(model => model.LastStationRoute)*@
+            @Html.DropDownListFor(model => model.LastStation, Model.StationsListItems)
             @Html.ValidationMessageFor(model => model.LastStation)
         </div>
 

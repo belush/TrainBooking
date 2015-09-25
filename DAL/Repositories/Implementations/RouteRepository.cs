@@ -4,13 +4,13 @@ using System.Linq;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories.Interfaces;
 
-namespace TrainBooking.DAL.Repositories
+namespace TrainBooking.DAL.Repositories.Implementations
 {
     public class RouteRepository : Repository, IRouteRepository
     {
         public List<Route> GetRoutes()
         {
-            return db.Routes.ToList();
+            return db.Routes.Where(r=>r.IsDeleted==false).ToList();
         }
 
         public void AddRoute(Route route)
@@ -21,8 +21,8 @@ namespace TrainBooking.DAL.Repositories
 
         public void DeleteRoute(Route route)
         {
-            db.Routes.Remove(route);
-            db.SaveChanges();
+            route.IsDeleted = true;
+            EditRoute(route);
         }
 
         public void EditRoute(Route route)

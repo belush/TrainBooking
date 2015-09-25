@@ -11,44 +11,42 @@ namespace TrainBooking.BL.Logic.Implementations
 {
     public class StationRouteLogic : IStationRouteLogic
     {
-        private IStationRouteRepository rep;
+        private readonly IStationRouteRepository _repository;
 
         public StationRouteLogic(IStationRouteRepository repository)
         {
-            rep = repository;
+            this._repository = repository;
         }
 
         public List<StationRoute> GetStationRoutesList()
         {
-            List<StationRoute> stationRoutes = rep.GetStationRoutes();
-            return stationRoutes;
+            return _repository.GetStationRoutes();
         }
 
         public StationRoute GetStationRouteById(int id)
         {
-            StationRoute stationRoute = rep.GetStationRoutes().First(s => s.Id == id);
-            return stationRoute;
+            return _repository.GetStationRoutes().First(s => s.Id == id);
         }
 
         public void DeleteStationRouteById(int id)
         {
             StationRoute stationRoute = GetStationRouteById(id);
-            rep.DeleteStationRoute(stationRoute);
+            _repository.DeleteStationRoute(stationRoute);
         }
 
         public void AddStationRoute(StationRoute stationRoute)
         {
-            rep.AddStationRoute(stationRoute);
+            _repository.AddStationRoute(stationRoute);
         }
 
         public void DeleteStationRoute(StationRoute stationRoute)
         {
-            rep.DeleteStationRoute(stationRoute);
+            _repository.DeleteStationRoute(stationRoute);
         }
 
         public void EditStationRoute(StationRoute stationRoute)
         {
-            rep.EditStationRoute(stationRoute);
+            _repository.EditStationRoute(stationRoute);
         }
     }
 }

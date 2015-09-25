@@ -5,8 +5,8 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
+               
+               
             </hgroup>
            
         </div>
@@ -14,11 +14,14 @@
 }
 
     <p>
-        @Html.ActionLink("Station List", "Index", "Station")
+        @Html.ActionLink("Станции", "Index", "Station")
     </p>
 <p>
-    @Html.ActionLink("Route List", "Index", "Route")
+    @Html.ActionLink("Маршруты", "Index", "Route")
 </p>
 <p>
-    @Html.ActionLink("StationRoute List", "Index", "StationRoute")
+    @Html.ActionLink("Расписание", "Index", "StationRoute")
+</p>
+<p>
+    @Html.ActionLink("Типы вагонов", "Index", "WagonType")
 </p>

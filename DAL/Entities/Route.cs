@@ -14,14 +14,7 @@ namespace TrainBooking.DAL.Entities
 
         public string Name { get; set; }
 
-        //public DateTime DepatureDate { get; set; }
-
-        //public TimeSpan DepatureTime { get; set; }
         public DateTime DepatureDateTime { get; set; }
-
-        //public DateTime ArrivalDate { get; set; }
-
-        //public TimeSpan ArrivalTime { get; set; }
 
         public DateTime ArrivalDateTime { get; set; }
 
@@ -31,11 +24,10 @@ namespace TrainBooking.DAL.Entities
 
         public virtual StationRoute LastStation { get; set; }
 
-        //public string StartingStation { get; set; }
-        //public string LastStation { get; set; }
-
         public virtual ICollection<StationRoute> WayStations { get; set; }
 
         public virtual ICollection<Wagon> Wagons { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

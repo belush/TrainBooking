@@ -17,9 +17,12 @@ namespace TrainBooking.DAL.EntityMetaData
 
         public virtual Wagon Wagon { get; set; }
 
-        public virtual string StartingStation { get; set; }
+        public int StartingStationRoute { get; set; }
 
-        public virtual string LastStation { get; set; }
-        //public User User { get; set; }
+        public int LastStationRoute { get; set; }
+
+        public virtual User User { get; set; }
+
+        public double Price { get; set; }
     }
 }

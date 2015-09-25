@@ -1,4 +1,4 @@
-﻿@model TrainBooking.DAL.Entities.Station
+﻿@model TrainBooking.Models.StationViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -11,7 +11,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Station</legend>
+        <legend>StationViewModel</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)

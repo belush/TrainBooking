@@ -1,0 +1,93 @@
+﻿@model TrainBooking.Models.TicketViewModel
+
+@{
+    ViewBag.Title = "BuyTicket";
+}
+
+<h2>Покупка билета</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TicketViewModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RouteNumber)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.RouteNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartingStationName)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.StartingStationName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastStationName)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.LastStationName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WagonNumber)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.WagonNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlaceNumber)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.PlaceNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.Price)
+        </div>
+
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.Price)
+        </div>
+       
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.StartingStationRouteId)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.LastStationRouteId)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.WagonId)
+        </div>
+
+        <p>
+            <input type="submit" value="Купить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

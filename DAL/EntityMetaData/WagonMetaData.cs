@@ -15,7 +15,9 @@ namespace TrainBooking.DAL.EntityMetaData
 
         public int Number { get; set; }
 
-        public WagonType WagonType { get; set; }
+        public virtual Route Route { get; set; }
+
+        public virtual WagonType WagonType { get; set; }
 
         public ICollection<Ticket> Tickets { get; set; }
     }

@@ -183,20 +183,35 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\StationRouteController.cs" />
+    <Compile Include="Controllers\WagonController.cs" />
+    <Compile Include="Controllers\WagonTypeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\RouteAddViewModel.cs" />
-    <Compile Include="Models\RouteViewModel.cs" />
-    <Compile Include="Models\StationRouteAddViewModel.cs" />
-    <Compile Include="Models\StationRouteViewModel.cs" />
+    <Compile Include="Models\ScheduleViewModel.cs" />
+    <Compile Include="Models\TicketViewModel.cs" />
+    <Compile Include="ValidationAttributes\CorrectArrivalDateAttribute.cs" />
+    <Compile Include="ValidationAttributes\CorrectDepatureDateAttribute.cs" />
+    <Compile Include="ValidationAttributes\DateGreaterThanAttribute.cs" />
+    <Compile Include="ValidationAttributes\NotRepeatWayStationAttribute.cs" />
+    <Compile Include="ValidationAttributes\NotEqualToAttribute.cs" />
+    <Compile Include="Models\RouteModels\RouteAddViewModel.cs" />
+    <Compile Include="Models\RouteModels\RouteViewModel.cs" />
+    <Compile Include="Models\StationRouteModels\StationRouteAddViewModel.cs" />
+    <Compile Include="Models\StationRouteModels\StationRouteViewModel.cs" />
     <Compile Include="Models\StationViewModel.cs" />
+    <Compile Include="ValidationAttributes\UniqueRouteNumberAttribute.cs" />
+    <Compile Include="ValidationAttributes\UniqueStationAttribute.cs" />
+    <Compile Include="Models\WagonTypeViewModel.cs" />
+    <Compile Include="Models\WagonModels\WagonAddViewModel.cs" />
+    <Compile Include="Models\WagonModels\WagonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -271,7 +286,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -300,27 +317,34 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Station\Create.cshtml" />
     <Content Include="Views\Station\Index.cshtml" />
     <Content Include="Views\Station\Edit.cshtml" />
     <Content Include="Views\Station\Delete.cshtml" />
-    <Content Include="Views\Route\Create.cshtml" />
     <Content Include="Views\Route\Delete.cshtml" />
     <Content Include="Views\Route\Edit.cshtml" />
-    <Content Include="Views\Route\Index.cshtml" />
     <Content Include="Views\StationRoute\Index.cshtml" />
     <Content Include="Views\StationRoute\Create.cshtml" />
     <Content Include="Views\Route\AddWay.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Station\Create.cshtml" />
+    <Content Include="Views\WagonType\Index.cshtml" />
+    <Content Include="Views\WagonType\Create.cshtml" />
+    <Content Include="Views\Route\AddWagons.cshtml" />
+    <Content Include="Views\Route\Index.cshtml" />
+    <Content Include="Views\WagonType\Edit.cshtml" />
+    <Content Include="Views\Wagon\Index.cshtml" />
+    <Content Include="Views\Route\Create.cshtml" />
+    <None Include="Views\Route\RouteSearch.cshtml" />
+    <Content Include="Views\Wagon\BuySucces.cshtml" />
+    <Content Include="Views\Wagon\BuyTicket.cshtml" />
+    <None Include="Views\Wagon\RouteChoose.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

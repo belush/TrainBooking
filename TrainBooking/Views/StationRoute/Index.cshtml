@@ -1,14 +1,12 @@
-﻿@model IEnumerable<TrainBooking.Models.StationRouteViewModel>
+﻿@model IEnumerable<TrainBooking.Models.StationRouteModels.StationRouteViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table>
     <tr>
         <th>
@@ -41,9 +39,7 @@
             @Html.DisplayFor(modelItem => item.RouteName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+           
         </td>
     </tr>
 }

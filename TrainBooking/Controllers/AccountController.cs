@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using TrainBooking.DAL;
+using TrainBooking.DAL.Entities;
 using WebMatrix.WebData;
 using TrainBooking.Filters;
 using TrainBooking.Models;
@@ -15,7 +17,7 @@ namespace TrainBooking.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         //
         // GET: /Account/Login
@@ -54,7 +56,7 @@ namespace TrainBooking.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Route");
         }
 
         //
@@ -79,9 +81,18 @@ namespace TrainBooking.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password,
+                        new
+                        {
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            MidName = model.MidName,
+                            BirthDate = model.BirthDate
+                        });
+
+                    Roles.AddUserToRole(model.UserName, "User");
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Route");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -262,15 +273,14 @@ namespace TrainBooking.Controllers
 
             if (ModelState.IsValid)
             {
-                // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (TrainBookingContext db = new TrainBookingContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    User user = db.User.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.User.Add(new User { UserName = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -337,7 +347,7 @@ namespace TrainBooking.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Route");
             }
         }
 

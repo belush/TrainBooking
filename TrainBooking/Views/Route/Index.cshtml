@@ -1,112 +1,36 @@
-﻿@model IEnumerable<TrainBooking.Models.RouteViewModel>
+﻿@model IEnumerable<TrainBooking.Models.RouteModels.RouteViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Маршруты</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+@if (User.IsInRole("Admin"))
+{
+    <p>
+    @Html.ActionLink("Создать", "Create")
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartingStation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastStation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepatureDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalDateTime)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.TravelTime)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartingStation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastStation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepatureDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalDateTime)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.TravelTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-            @Html.ActionLink("Delete", "Delete", new {id = item.Id}) |
-            @Html.ActionLink("Add way station", "AddWay", new {id = item.Id})
-        </td>
-    </tr>
-    if (item.WayStations!=null)
-    {
-        foreach (var way in item.WayStations)
-        {
-             <tr>
-        <td>
-           
-        </td>
-        <td>
-            @Html.DisplayFor(wayItem => way.Station.Name)
-        </td>
-        
-        <td>
-        </td>
-                 <td>
-                 </td>
-                 <td>
-                     @Html.DisplayFor(wayItem => way.DepatureDateTime)
-                 </td>
-                 <td>
-                     @Html.DisplayFor(wayItem => way.ArrivalDateTime)
-                 </td>
-        <td>
-            @Html.DisplayFor(wayItem => way.ArrivalDateTime )
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-            @Html.ActionLink("Delete", "Delete", new {id = item.Id}) |
-        </td>
-    </tr>
-         @*<tr>
-             <td>
-                 @Html.DisplayFor(wayItem => way.Id)
-             </td>
-        </tr>*@ 
-        }
-    }
-    
-   
 }
 
-</table>
+
+<div>
+    @using (Ajax.BeginForm("RouteSearch", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <text>Откуда</text>
+        <input type="text" name="startingStationName" style="width: 200px"/>
+        <text> - Куда</text>
+        <input type="text" name="lastStationName" style="width: 200px"/>
+        <text>Отправление</text>
+    <input 
+           type="date" name="startingDateTime" style="width:150px">
+        <input type="submit" value="Поиск" />
+    }
+    <div id="results"></div>
+    @*@Html.Action("RouteSearch")*@
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery-1.7.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+}

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using TrainBooking.BL.Logic.Interfaces;
+using TrainBooking.DAL;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories;
 using TrainBooking.DAL.Repositories.Interfaces;
@@ -19,6 +20,19 @@ namespace TrainBooking.BL.Logic
 
         public List<SelectListItem> GetStationsListItems()
         {
+            List<SelectListItem> stationsListItems = GetStationsList().
+                Select(s => new SelectListItem()
+                {
+                    Text = s.Name,
+                    Value = s.Id.ToString()
+                }).ToList();
+
+            return stationsListItems;
+        }
+
+        public List<SelectListItem> GetStationsListItemsByRouteId(int routeId)
+        {
+
             List<SelectListItem> stationsListItems = GetStationsList().
                 Select(s => new SelectListItem()
                 {
@@ -61,9 +75,5 @@ namespace TrainBooking.BL.Logic
         {
             _repository.EditStation(station);
         }
-
-
-
-
     }
 }

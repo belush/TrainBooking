@@ -13,21 +13,8 @@ namespace TrainBooking.DAL.EntityMetaData
         [Key]
         public int Id { get; set; }
 
-        //[DataType(DataType.Date)]
-        //public DateTime DepatureDate { get; set; }
-
-        //[DataType(DataType.Time)]
-        //public TimeSpan DepatureTime { get; set; }
-
         [DataType(DataType.DateTime)]
         public DateTime DepatureDateTime { get; set; }
-
-
-        //[DataType(DataType.Date)]
-        //public DateTime ArrivalDate { get; set; }
-
-        //[DataType(DataType.Time)]
-        //public TimeSpan ArrivalTime { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime ArrivalDateTime { get; set; }

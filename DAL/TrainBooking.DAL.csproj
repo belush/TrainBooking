@@ -45,10 +45,12 @@
   <ItemGroup>
     <Compile Include="Entities\StationRoute.cs" />
     <Compile Include="Entities\Ticket.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="EntityMetaData\RouteMetaData.cs" />
     <Compile Include="EntityMetaData\StationMetaData.cs" />
     <Compile Include="EntityMetaData\StationRouteMetaData.cs" />
     <Compile Include="EntityMetaData\TicketMetaData.cs" />
+    <Compile Include="EntityMetaData\UserMetaData.cs" />
     <Compile Include="EntityMetaData\WagonMetaData.cs" />
     <Compile Include="EntityMetaData\WagonTypeMetaData.cs" />
     <Compile Include="Entities\Route.cs" />
@@ -75,8 +77,44 @@
     <Compile Include="Migrations\201509161649489_NextFixes3.Designer.cs">
       <DependentUpon>201509161649489_NextFixes3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509172037023_Adminka.cs" />
+    <Compile Include="Migrations\201509172037023_Adminka.Designer.cs">
+      <DependentUpon>201509172037023_Adminka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509201332267_Fixes.cs" />
+    <Compile Include="Migrations\201509201332267_Fixes.Designer.cs">
+      <DependentUpon>201509201332267_Fixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509201403591_Fixes2.cs" />
+    <Compile Include="Migrations\201509201403591_Fixes2.Designer.cs">
+      <DependentUpon>201509201403591_Fixes2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509221830330_SomeSuperChanges.cs" />
+    <Compile Include="Migrations\201509221830330_SomeSuperChanges.Designer.cs">
+      <DependentUpon>201509221830330_SomeSuperChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509222343065_NewFixes.cs" />
+    <Compile Include="Migrations\201509222343065_NewFixes.Designer.cs">
+      <DependentUpon>201509222343065_NewFixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509230228280_isDeleted.cs" />
+    <Compile Include="Migrations\201509230228280_isDeleted.Designer.cs">
+      <DependentUpon>201509230228280_isDeleted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509231113284_TicketPrice.cs" />
+    <Compile Include="Migrations\201509231113284_TicketPrice.Designer.cs">
+      <DependentUpon>201509231113284_TicketPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509241430423_TicketFixes.cs" />
+    <Compile Include="Migrations\201509241430423_TicketFixes.Designer.cs">
+      <DependentUpon>201509241430423_TicketFixes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implementations\TicketRepository.cs" />
+    <Compile Include="Repositories\Implementations\UserRepository.cs" />
+    <Compile Include="Repositories\Implementations\WagonRepository.cs" />
+    <Compile Include="Repositories\Implementations\WagonTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRouteRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStationRouteRepository.cs" />
@@ -84,6 +122,10 @@
     <Compile Include="Repositories\Implementations\RouteRepository.cs" />
     <Compile Include="Repositories\Implementations\StationRepository.cs" />
     <Compile Include="Repositories\Implementations\StationRouteRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITicketRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IWagonRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IWagonTypeRepository.cs" />
     <Compile Include="TrainBookingContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +147,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509161649489_NextFixes3.resx">
       <DependentUpon>201509161649489_NextFixes3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509172037023_Adminka.resx">
+      <DependentUpon>201509172037023_Adminka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509201332267_Fixes.resx">
+      <DependentUpon>201509201332267_Fixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509201403591_Fixes2.resx">
+      <DependentUpon>201509201403591_Fixes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509221830330_SomeSuperChanges.resx">
+      <DependentUpon>201509221830330_SomeSuperChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509222343065_NewFixes.resx">
+      <DependentUpon>201509222343065_NewFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509230228280_isDeleted.resx">
+      <DependentUpon>201509230228280_isDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231113284_TicketPrice.resx">
+      <DependentUpon>201509231113284_TicketPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509241430423_TicketFixes.resx">
+      <DependentUpon>201509241430423_TicketFixes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

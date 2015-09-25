@@ -2,7 +2,7 @@
 {
     public class Repository
     {
-        protected TrainBookingContext db = new TrainBookingContext();
+        protected readonly TrainBookingContext db = new TrainBookingContext();
 
         public Repository(TrainBookingContext context)
         {

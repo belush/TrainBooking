@@ -9,30 +9,32 @@ using TrainBooking.BL.Logic.Interfaces;
 using TrainBooking.DAL;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories;
+using TrainBooking.DAL.Repositories.Implementations;
 using TrainBooking.Models;
 
 namespace TrainBooking.Controllers
 {
-    public class StationController : Controller
+    [Authorize(Roles = "Admin")]
+    public class StationController : BaseController
     {
-        private readonly IStationLogic logic;
+        private readonly IStationLogic _stationLogic;
 
         public StationController()
         {
             var context = new TrainBookingContext();
 
-            logic = new StationLogic(new StationRepository(context));
+            _stationLogic = new StationLogic(new StationRepository(context));
         }
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            List<Station> stations = logic.GetStationsList();
-
-            List<StationViewModel> stationViews = stations.Select(x => new StationViewModel()
+            var stations = _stationLogic.GetStationsList();
+            var stationViews = stations.Select(x => new StationViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name
-                }).ToList();
+                });
 
             return View(stationViews);
         }
@@ -43,51 +45,55 @@ namespace TrainBooking.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Station station)
+        public ActionResult Create(StationViewModel stationViewModel)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                logic.AddStation(station);
-                return RedirectToAction("Index");
+                return View(stationViewModel);
             }
-            catch
+
+            var station = new Station
             {
-                return View();
-            }
+                Id = stationViewModel.Id,
+                Name = stationViewModel.Name
+            };
+
+            _stationLogic.AddStation(station);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            //
-            // как сохрнить дату при редактировании сущности? поиграть с форматами выведения дат
-            //
-            Station station = logic.GetStationById(id);
-            StationViewModel stationVM = new StationViewModel();
-            stationVM.Id = station.Id;
-            stationVM.Name = station.Name;
-            return View(stationVM);
+            var station = _stationLogic.GetStationById(id);
+            var stationViewModel = new StationViewModel
+            {
+                Id = station.Id,
+                Name = station.Name
+            };
+            return View(stationViewModel);
         }
 
         [HttpPost]
-        public ActionResult Edit(StationViewModel stationVM)
+        public ActionResult Edit(StationViewModel stationViewModel)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                Station station = new Station();
-                station.Id = stationVM.Id;
-                station.Name = stationVM.Name;
-                logic.EditStation(station);
-                return RedirectToAction("Index");
+                return View(stationViewModel);
             }
-            catch
+
+            var station = new Station
             {
-                return View();
-            }
+                Id = stationViewModel.Id,
+                Name = stationViewModel.Name
+            };
+            _stationLogic.EditStation(station);
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            Station station = logic.GetStationById(id);
+            var station = _stationLogic.GetStationById(id);
             return View(station);
         }
 
@@ -96,18 +102,13 @@ namespace TrainBooking.Controllers
         {
             try
             {
-                logic.DeleteStationById(id);
+                _stationLogic.DeleteStationById(id);
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
-        }
-
-        public ActionResult Details(int id)
-        {
-            return  View();
         }
     }
 }

@@ -17,26 +17,12 @@ namespace TrainBooking.DAL.EntityMetaData
 
         public string Name { get; set; }
 
-        //[DataType(DataType.Date)]
-        //public DateTime DepatureDate { get; set; }
-
-        //[DataType(DataType.Time)]
-        //public TimeSpan DepatureTime { get; set; }
-
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DepatureDateTime { get; set; }
 
-
-        //[DataType(DataType.DateTime)]
-        //public DateTime ArrivalDate { get; set; }
-
-        //[DataType(DataType.Time)]
-        //public TimeSpan ArrivalTime { get; set; }
-
         [DataType(DataType.DateTime)]
         public DateTime ArrivalDateTime { get; set; }
-
 
         public double FullPrice { get; set; }
 
@@ -47,5 +33,7 @@ namespace TrainBooking.DAL.EntityMetaData
         public virtual ICollection<StationRoute> WayStations { get; set; }
 
         public virtual ICollection<Wagon> Wagons { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

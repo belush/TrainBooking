@@ -6,3 +6,11 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\BL\bi
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\BL\obj\Debug\TrainBooking.BL.csprojResolveAssemblyReference.cache
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\BL\obj\Debug\BL.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\BL\obj\Debug\BL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\bin\Debug\BL.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\bin\Debug\BL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\bin\Debug\DAL.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\bin\Debug\EntityFramework.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\bin\Debug\DAL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\obj\Debug\TrainBooking.BL.csprojResolveAssemblyReference.cache
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\obj\Debug\BL.dll
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\obj\Debug\BL.pdb

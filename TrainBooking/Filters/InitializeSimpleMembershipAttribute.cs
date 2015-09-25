@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
+using System.Web.Security;
+using TrainBooking.DAL;
 using WebMatrix.WebData;
 using TrainBooking.Models;
 
@@ -23,13 +25,17 @@ namespace TrainBooking.Filters
 
         private class SimpleMembershipInitializer
         {
+            readonly SimpleRoleProvider _roles = (SimpleRoleProvider)Roles.Provider;
+            SimpleMembershipProvider _membership = (SimpleMembershipProvider)Membership.Provider;
+
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                //Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<TrainBookingContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new TrainBookingContext())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +44,43 @@ namespace TrainBooking.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("TrainBookingContext", "User", "UserId", "UserName",
+                        autoCreateTables: true);
+
+                    if (!_roles.RoleExists("Admin"))
+                    {
+                        _roles.CreateRole("Admin");
+                    }
+                    if (!_roles.RoleExists("User"))
+                    {
+                        _roles.CreateRole("User");
+                    }
+
+                    if (_membership.GetUser("admin1", false) == null)
+                    {
+                        WebSecurity.CreateUserAndAccount("admin1", "123456",
+                            new
+                            {
+                                FirstName = "admin",
+                                MidName = "admin",
+                                LastName = "admin",
+                                BirthDate = 01 / 01 / 1985
+                            });
+                        _roles.AddUsersToRoles(new[] { "admin1" }, new[] { "Admin" });
+                    }
+
+                    if (_membership.GetUser("user", false) == null)
+                    {
+                        WebSecurity.CreateUserAndAccount("user", "123456",
+                            new
+                            {
+                                FirstName = "user",
+                                MidName = "user",
+                                LastName = "user",
+                                BirthDate = 01 / 01 / 1985
+                            });
+                        _roles.AddUsersToRoles(new[] { "user" }, new[] { "User" });
+                    }
                 }
                 catch (Exception ex)
                 {

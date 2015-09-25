@@ -1,0 +1,54 @@
+﻿@model TrainBooking.Models.WagonModels.WagonAddViewModel
+
+@{
+    ViewBag.Title = "AddWagons";
+}
+
+<h2>Добавление вагонов</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WagonAddViewModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NumberOfWagons)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NumberOfWagons)
+            @Html.ValidationMessageFor(model => model.NumberOfWagons)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WagonType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.WagonType, Model.WagonTypeListItems)
+            @Html.ValidationMessageFor(model => model.WagonType)
+        </div>
+
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.RouteId)*@
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RouteId)
+            @Html.ValidationMessageFor(model => model.RouteId)
+        </div>
+
+        <p>
+            <input type="submit" value="Добавить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

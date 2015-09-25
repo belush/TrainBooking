@@ -9,11 +9,14 @@ using TrainBooking.BL.Logic.Interfaces;
 using TrainBooking.DAL;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories;
+using TrainBooking.DAL.Repositories.Implementations;
 using TrainBooking.Models;
+using TrainBooking.Models.StationRouteModels;
 
 namespace TrainBooking.Controllers
 {
-    public class StationRouteController : Controller
+    [Authorize(Roles = "Admin")]
+    public class StationRouteController : BaseController
     {
         private readonly IStationRouteLogic _stationRouteLogic;
         private readonly IRouteLogic _routeLogic;
@@ -30,9 +33,7 @@ namespace TrainBooking.Controllers
 
         public ActionResult Index()
         {
-            List<StationRoute> stationRoutes = _stationRouteLogic.GetStationRoutesList();
-
-            List<StationRouteViewModel> stationRouteViewModels = _stationRouteLogic.GetStationRoutesList()
+            var stationRouteViewModels = _stationRouteLogic.GetStationRoutesList()
                 .Select(sr => new StationRouteViewModel()
                 {
                     Id = sr.Id,
@@ -44,85 +45,43 @@ namespace TrainBooking.Controllers
             return View(stationRouteViewModels);
         }
 
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         public ActionResult Create(int routeId)
         {
-            StationRouteAddViewModel stationRouteAddViewModel = new StationRouteAddViewModel();
-            stationRouteAddViewModel.RouteId = routeId;
+            var stationRouteAddViewModel = new StationRouteAddViewModel
+            {
+                RouteId = routeId,
+                StationsListItems = _stationLogic.GetStationsListItems()
+            };
 
-            ViewData["stations"] = _stationLogic.GetStationsListItems();
             return View(stationRouteAddViewModel);
         }
 
         [HttpPost]
         public ActionResult Create(StationRouteAddViewModel stationRouteAddViewModel)
         {
-            //try
-            //{
-            StationRoute stationRoute = new StationRoute();
+            if (!ModelState.IsValid)
+            {
+                stationRouteAddViewModel.StationsListItems = _stationLogic.GetStationsListItems();
+                return View(stationRouteAddViewModel);
+            }
+
             Station station = _stationLogic.GetStationById(stationRouteAddViewModel.StationId);
             Route route = _routeLogic.GetRouteById(stationRouteAddViewModel.RouteId);
 
-            stationRoute.Id = stationRouteAddViewModel.Id;
-            stationRoute.Station = station;
-            //stationRoute.Route = route;
-            stationRoute.DepatureDateTime = stationRouteAddViewModel.DepatureDate
-                .Add(stationRouteAddViewModel.DepatureTime);
-            stationRoute.ArrivalDateTime = stationRouteAddViewModel.ArrivalDate
-                .Add(stationRouteAddViewModel.ArrivalTime);
+            StationRoute stationRoute = new StationRoute
+            {
+                Id = stationRouteAddViewModel.Id,
+                Station = station,
+                DepatureDateTime = stationRouteAddViewModel.DepatureDate
+                    .Add(stationRouteAddViewModel.DepatureTime),
+                ArrivalDateTime = stationRouteAddViewModel.ArrivalDate
+                    .Add(stationRouteAddViewModel.ArrivalTime)
+            };
+
             route.WayStations.Add(stationRoute);
             _routeLogic.EditRoute(route);
-            //_stationRouteLogic.AddStationRoute(stationRoute);
+
             return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
-        }
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

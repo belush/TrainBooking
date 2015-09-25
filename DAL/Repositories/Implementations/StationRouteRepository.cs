@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories.Interfaces;
 
-namespace TrainBooking.DAL.Repositories
+namespace TrainBooking.DAL.Repositories.Implementations
 {
     public class StationRouteRepository : Repository, IStationRouteRepository
     {
@@ -33,27 +31,30 @@ namespace TrainBooking.DAL.Repositories
         {
             //db.Entry(stationRoute).State = EntityState.Modified;
             //db.SaveChanges();
+            //TODO:!
 
-            db.Entry(stationRoute).State = EntityState.Modified;
+            //
+            //db.Entry(stationRoute).State = EntityState.Modified;
 
-            bool saveFailed;
-            do
-            {
-                saveFailed = false;
+            //bool saveFailed;
+            //do
+            //{
+            //    saveFailed = false;
 
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    saveFailed = true;
+            //    try
+            //    {
+            //        db.SaveChanges();
+            //    }
+            //    catch (DbUpdateConcurrencyException ex)
+            //    {
+            //        saveFailed = true;
 
-                    // Update the values of the entity that failed to save from the store 
-                    ex.Entries.Single().Reload();
-                }
+            //        // Update the values of the entity that failed to save from the store 
+            //        ex.Entries.Single().Reload();
+            //    }
 
-            } while (saveFailed); 
+            //} while (saveFailed); 
+            throw new NotImplementedException();
         }
 
         public StationRouteRepository(TrainBookingContext context)

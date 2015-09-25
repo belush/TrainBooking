@@ -12,7 +12,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Train Booking", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Train Booking", "Index", "Route")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -20,9 +20,13 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li>@Html.ActionLink("Панель управления", "Index", "Home")</li>
+                            }
+                            <li>@Html.ActionLink("Маршруты", "Index", "Route")</li>
+                            <li>@Html.ActionLink("Станции", "Index", "Station")</li>
                         </ul>
                     </nav>
                 </div>

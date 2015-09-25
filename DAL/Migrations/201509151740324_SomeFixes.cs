@@ -18,16 +18,16 @@ namespace TrainBooking.DAL.Migrations
             AddForeignKey("dbo.Routes", "LastStation_Id", "dbo.StationRoutes", "Id");
             AddForeignKey("dbo.Routes", "StartingStation_Id", "dbo.StationRoutes", "Id");
             AddForeignKey("dbo.StationRoutes", "Route_Id1", "dbo.Routes", "Id");
-            DropColumn("dbo.Routes", "StartingStation");
-            DropColumn("dbo.Routes", "LastStation");
+            DropColumn("dbo.Routes", "StartingStationRoute");
+            DropColumn("dbo.Routes", "LastStationRoute");
             DropColumn("dbo.Tickets", "Route_Id");
         }
         
         public override void Down()
         {
             AddColumn("dbo.Tickets", "Route_Id", c => c.Int());
-            AddColumn("dbo.Routes", "LastStation", c => c.String());
-            AddColumn("dbo.Routes", "StartingStation", c => c.String());
+            AddColumn("dbo.Routes", "LastStationRoute", c => c.String());
+            AddColumn("dbo.Routes", "StartingStationRoute", c => c.String());
             DropForeignKey("dbo.StationRoutes", "Route_Id1", "dbo.Routes");
             DropForeignKey("dbo.Routes", "StartingStation_Id", "dbo.StationRoutes");
             DropForeignKey("dbo.Routes", "LastStation_Id", "dbo.StationRoutes");

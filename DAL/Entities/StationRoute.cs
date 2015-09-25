@@ -13,15 +13,7 @@ namespace TrainBooking.DAL.Entities
     {
         public int Id { get; set; }
 
-        //public DateTime DepatureDate { get; set; }
-
-        //public TimeSpan DepatureTime { get; set; }
-
         public DateTime DepatureDateTime { get; set; }
-
-        //public DateTime ArrivalDate { get; set; }
-
-        //public TimeSpan ArrivalTime { get; set; }
 
         public DateTime ArrivalDateTime { get; set; }
 
