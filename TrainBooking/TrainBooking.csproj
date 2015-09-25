@@ -344,6 +344,7 @@
     <None Include="Views\Route\RouteSearch.cshtml" />
     <Content Include="Views\Wagon\BuySucces.cshtml" />
     <Content Include="Views\Wagon\BuyTicket.cshtml" />
+    <Content Include="Views\Route\Report.cshtml" />
     <None Include="Views\Wagon\RouteChoose.cshtml" />
   </ItemGroup>
   <ItemGroup>

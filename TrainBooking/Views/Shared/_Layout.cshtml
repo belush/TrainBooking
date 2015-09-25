@@ -23,11 +23,13 @@
 
                             @if (User.IsInRole("Admin"))
                             {
+                                <li>@Html.ActionLink("Отчет", "Report", "Route")</li>
                                 <li>@Html.ActionLink("Типы вагонов", "Index", "WagonType")</li>
                                 <li>@Html.ActionLink("Расписание", "Index", "StationRoute")</li>
                             }
                             <li>@Html.ActionLink("Маршруты", "Index", "Route")</li>
                             <li>@Html.ActionLink("Станции", "Index", "Station")</li>
+
                         </ul>
                     </nav>
                 </div>

@@ -65,7 +65,7 @@ namespace TrainBooking.Controllers
                 WayStations = r.WayStations.ToList(),
                 //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()
                 //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum() - tickets.Where(t => t.Wagon.Route.Id == r.Id).Select(t => t.PlaceNumber).Count()
-                
+
                 //ПРОВЕРИТЬ НА НОРМАЛЬНОСТЬ!!!!
                 EmptyPlaces = _routeLogic.GetEmptyPlacesCount(r, tickets)
             }).ToList();
@@ -96,9 +96,37 @@ namespace TrainBooking.Controllers
         }
 
 
-        public ActionResult Schedule()
+        public ActionResult Report()
         {
             List<ScheduleViewModel> scheduleViewModels = new List<ScheduleViewModel>();
+
+            List<Ticket> tickets = _ticketLogic.GetTicketsList();
+
+            IEnumerable<string> routeNames = tickets.Select(t => t.Wagon.Route.Name).Distinct();
+
+            foreach (string routeName in routeNames)
+            {
+                scheduleViewModels.Add(new ScheduleViewModel
+                {
+                    Name = routeName,
+                    Count = tickets.Count(t => t.Wagon.Route.Name == routeName),
+                    FullPrice = tickets.Where(t => t.Wagon.Route.Name == routeName).Select(t => t.Price).Sum()
+                });
+            }
+
+            scheduleViewModels = scheduleViewModels.OrderByDescending(s => s.Count).ToList();
+
+            //foreach (Ticket ticket in tickets)
+            //{
+            //    scheduleViewModels.Add(new ScheduleViewModel
+            //    {
+            //        Name = ticket.Wagon.Route.Name,
+            //        Count = tickets.Count(t => t.Wagon.Route.Name == ticket.Wagon.Route.Name),
+            //        FullPrice = tickets.Where(t => t.Wagon.Route.Name == ticket.Wagon.Route.Name).Select(t => t.Price).Sum()
+            //    });
+            //}
+
+            //scheduleViewModels = (List<ScheduleViewModel>) scheduleViewModels.Distinct();
 
             //RouteAddViewModel routeAddViewModel = new RouteAddViewModel
             //{
