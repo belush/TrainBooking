@@ -1,18 +1,15 @@
+using System.Data.Entity.Migrations;
+
 namespace TrainBooking.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<TrainBooking.DAL.TrainBookingContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TrainBookingContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(TrainBooking.DAL.TrainBookingContext context)
+        protected override void Seed(TrainBookingContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TrainBooking.DAL.EntityMetaData;
 
 namespace TrainBooking.DAL.Entities
 {
-    [MetadataType(typeof(RouteMetaData))]
     public class Route
     {
+        [Key]
         public int Id { get; set; }
 
         public int Number { get; set; }
 
         public string Name { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DepatureDateTime { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime ArrivalDateTime { get; set; }
 
         public double FullPrice { get; set; }

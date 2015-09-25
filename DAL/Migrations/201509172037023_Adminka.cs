@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace TrainBooking.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class Adminka : DbMigration
     {
         public override void Up()

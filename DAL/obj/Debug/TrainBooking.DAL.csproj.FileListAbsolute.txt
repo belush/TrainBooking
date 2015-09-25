@@ -18,3 +18,4 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\o
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\obj\Debug\TrainBooking.DAL.Migrations.isDeleted.resources
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\obj\Debug\TrainBooking.DAL.Migrations.TicketPrice.resources
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\obj\Debug\TrainBooking.DAL.Migrations.TicketFixes.resources
+C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking\DAL\obj\Debug\TrainBooking.DAL.Migrations.removemetadata.resources

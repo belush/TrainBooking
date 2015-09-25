@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TrainBooking.DAL.EntityMetaData;
 
 namespace TrainBooking.DAL.Entities
 {
-    [MetadataType(typeof(StationRouteMetaData))]
     public class StationRoute
     {
+        [Key]
         public int Id { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime DepatureDateTime { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime ArrivalDateTime { get; set; }
 
         public virtual Station Station { get; set; }

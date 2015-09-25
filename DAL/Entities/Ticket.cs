@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TrainBooking.DAL.EntityMetaData;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TrainBooking.DAL.Entities
 {
-    [MetadataType(typeof(TicketMetaData))]
     public class Ticket
     {
+        [Key]
         public int Id { get; set; }
 
         public int PlaceNumber { get; set; }

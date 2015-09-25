@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace TrainBooking.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class NetxFixes2 : DbMigration
     {
         public override void Up()
