@@ -11,6 +11,8 @@ using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories;
 using TrainBooking.DAL.Repositories.Implementations;
 using TrainBooking.Models;
+using AutoMapper;
+
 
 namespace TrainBooking.Controllers
 {
@@ -30,11 +32,17 @@ namespace TrainBooking.Controllers
         public ActionResult Index()
         {
             var stations = _stationLogic.GetStationsList();
-            var stationViews = stations.Select(x => new StationViewModel()
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                });
+
+            #region OLD MAPPING
+            //var stationViews = stations.Select(x => new StationViewModel()
+            //    {
+            //        Id = x.Id,
+            //        Name = x.Name
+            //    });
+            #endregion
+
+            Mapper.CreateMap<Station, StationViewModel>();
+            var stationViews = Mapper.Map<List<Station>, List<StationViewModel>>(stations);
 
             return View(stationViews);
         }
@@ -65,11 +73,18 @@ namespace TrainBooking.Controllers
         public ActionResult Edit(int id)
         {
             var station = _stationLogic.GetStationById(id);
-            var stationViewModel = new StationViewModel
-            {
-                Id = station.Id,
-                Name = station.Name
-            };
+
+            #region OLD MAPPING
+            //var stationViewModel = new StationViewModel
+            //{
+            //    Id = station.Id,
+            //    Name = station.Name
+            //};
+            #endregion
+
+            Mapper.CreateMap<Station, StationViewModel>();
+            var stationViewModel = Mapper.Map<Station, StationViewModel>(station);
+
             return View(stationViewModel);
         }
 
@@ -81,11 +96,17 @@ namespace TrainBooking.Controllers
                 return View(stationViewModel);
             }
 
-            var station = new Station
-            {
-                Id = stationViewModel.Id,
-                Name = stationViewModel.Name
-            };
+            #region OLD MAPPING
+            //var station = new Station
+            //{
+            //    Id = stationViewModel.Id,
+            //    Name = stationViewModel.Name
+            //};
+            #endregion
+
+            Mapper.CreateMap<StationViewModel, Station>();
+            var station = Mapper.Map<StationViewModel, Station>(stationViewModel);
+
             _stationLogic.EditStation(station);
 
             return RedirectToAction("Index");

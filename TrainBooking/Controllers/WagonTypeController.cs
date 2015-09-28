@@ -10,6 +10,7 @@ using TrainBooking.DAL;
 using TrainBooking.DAL.Entities;
 using TrainBooking.DAL.Repositories.Implementations;
 using TrainBooking.Models;
+using AutoMapper;
 
 namespace TrainBooking.Controllers
 {
@@ -27,15 +28,22 @@ namespace TrainBooking.Controllers
 
         public ActionResult Index()
         {
-            var wagonTypeViewModelList =
-                _wagonTypeLogic.GetWagonTypeList()
-                .Select(w => new WagonTypeViewModel()
-                {
-                    Id = w.Id,
-                    Name = w.Name,
-                    Coefficient = w.Coefficient,
-                    NumberOfPlaces = w.NumberOfPlaces
-                });
+            #region OLD MAPPING
+            //var wagonTypeViewModelList =
+            //    _wagonTypeLogic.GetWagonTypeList()
+            //    .Select(w => new WagonTypeViewModel()
+            //    {
+            //        Id = w.Id,
+            //        Name = w.Name,
+            //        Coefficient = w.Coefficient,
+            //        NumberOfPlaces = w.NumberOfPlaces
+            //    });
+            #endregion
+
+            var wagonTypeList = _wagonTypeLogic.GetWagonTypeList();
+
+            Mapper.CreateMap<WagonType, WagonTypeViewModel>();
+            var wagonTypeViewModelList = Mapper.Map<List<WagonType>, List<WagonTypeViewModel>>(wagonTypeList);
 
             return View(wagonTypeViewModelList);
         }
@@ -58,14 +66,17 @@ namespace TrainBooking.Controllers
             {
                 return View(wagonTypeViewModel);
             }
-
-            var wagonType = new WagonType
-            {
-                Id = wagonTypeViewModel.Id,
-                Name = wagonTypeViewModel.Name,
-                NumberOfPlaces = wagonTypeViewModel.NumberOfPlaces,
-                Coefficient = wagonTypeViewModel.Coefficient
-            };
+            #region OLD MAPPING
+            //var wagonType = new WagonType
+            //{
+            //    Id = wagonTypeViewModel.Id,
+            //    Name = wagonTypeViewModel.Name,
+            //    NumberOfPlaces = wagonTypeViewModel.NumberOfPlaces,
+            //    Coefficient = wagonTypeViewModel.Coefficient
+            //};
+            #endregion
+            Mapper.CreateMap<WagonTypeViewModel, WagonType>();
+            var wagonType = Mapper.Map<WagonTypeViewModel, WagonType>(wagonTypeViewModel);
 
             _wagonTypeLogic.AddWagonType(wagonType);
 
@@ -95,13 +106,17 @@ namespace TrainBooking.Controllers
                 return View();
             }
 
-            WagonType wagonType = new WagonType
-            {
-                Id = wagonTypeViewModel.Id,
-                Name = wagonTypeViewModel.Name,
-                NumberOfPlaces = wagonTypeViewModel.NumberOfPlaces,
-                Coefficient = wagonTypeViewModel.Coefficient
-            };
+            #region OLD MAPPING
+            //WagonType wagonType = new WagonType
+            //{
+            //    Id = wagonTypeViewModel.Id,
+            //    Name = wagonTypeViewModel.Name,
+            //    NumberOfPlaces = wagonTypeViewModel.NumberOfPlaces,
+            //    Coefficient = wagonTypeViewModel.Coefficient
+            //};
+             #endregion
+            Mapper.CreateMap<WagonTypeViewModel, WagonType>();
+            var wagonType = Mapper.Map<WagonTypeViewModel, WagonType>(wagonTypeViewModel);
 
             _wagonTypeLogic.EditWagonType(wagonType);
 

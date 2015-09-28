@@ -15,6 +15,7 @@ using TrainBooking.DAL.Repositories.Implementations;
 using TrainBooking.Models;
 using TrainBooking.Models.WagonModels;
 using WebMatrix.WebData;
+using AutoMapper;
 
 namespace TrainBooking.Controllers
 {
@@ -44,12 +45,17 @@ namespace TrainBooking.Controllers
         {
             List<Wagon> wagons = _wagonLogic.GetWagonList().Where(w => w.Route.Id == id).ToList();
 
-            var wagonViewModels = wagons.Select(w => new WagonViewModel()
-            {
-                Id = w.Id,
-                Number = w.Number,
-                WagonType = w.WagonType
-            });
+            #region OLD MAPPING
+            //var wagonViewModels = wagons.Select(w => new WagonViewModel()
+            //{
+            //    Id = w.Id,
+            //    Number = w.Number,
+            //    WagonType = w.WagonType
+            //});
+            #endregion
+
+            Mapper.CreateMap<Wagon, WagonViewModel>();
+            var wagonViewModels = Mapper.Map<List<Wagon>, List<WagonViewModel>>(wagons);
 
             List<Station> stations = _routeLogic.GetRoutesList().Where(r => r.Id == id).Select(r => r.StartingStation.Station).ToList();
             stations.AddRange(_routeLogic.GetRoutesList().Where(r => r.Id == id).Select(r => r.LastStation.Station));
@@ -69,6 +75,9 @@ namespace TrainBooking.Controllers
                  Value = s.Id.ToString()
              }).ToList();
 
+            //
+            // ADD THE FILELD FOR SELECTED LIST ITEM
+            //
             ViewData["stations"] = stationsListItems;
 
             return View(wagonViewModels);
@@ -79,6 +88,7 @@ namespace TrainBooking.Controllers
         {
             var wagons = _wagonLogic.GetFilteredWagons(startingStationId, lastStationId);
 
+            #region OLD MAPPING
             var wagonViewModels = wagons.Select(w => new WagonViewModel()
             {
                 Id = w.Id,
@@ -88,9 +98,25 @@ namespace TrainBooking.Controllers
                 PricePerPlace = _wagonLogic.GetPrice(w, startingStationId, lastStationId),
                 EmptyPlaces = new List<int>()
             }).ToList();
+            #endregion
+
+            //Wagon wagon = wagons.Last();
+            //Mapper.CreateMap<Wagon, WagonViewModel>()
+            //    .ForMember(x => x.PricePerPlace, opt =>
+            //    {
+            //        _wagonLogic.GetPrice(opt, startingStationId, lastStationId);
+            //    })
+            //    .ForMember(x => x.EmptyPlaces, opt =>
+            //    {
+            //        new List<int>();
+            //    });
+            //var wagonViewModels = Mapper.Map<List<Wagon>, List<WagonViewModel>>(wagons);
+
 
             List<Ticket> tickets = _ticketLogic.GetTicketsList();
 
+
+            #region WATCH AND REMAKE
             //tickets = tickets.Where(t => t.StartingStationRoute == startingStationId).ToList();
             //tickets = tickets.Where(t => (t.StartingStationRoute == startingStationId)
             //    && (t.LastStationRoute == lastStationId)).ToList();
@@ -106,7 +132,7 @@ namespace TrainBooking.Controllers
             //        t =>
             //            (_stationRouteLogic.GetStationRouteById(t.LastStationRoute).Station.Id == lastStationId))
             //        .ToList();
-
+            #endregion
 
             foreach (WagonViewModel wagonViewModel in wagonViewModels)
             {
@@ -139,19 +165,19 @@ namespace TrainBooking.Controllers
 
             TicketViewModel ticketViewModel = new TicketViewModel
             {
-                WagonNumber = wagon.Number,
-                UserName = user.FirstName,
                 PlaceNumber = placeNumber,
+                WagonNumber = wagon.Number,
+                WagonId = wagon.Id,
+                Price = _wagonLogic.GetPrice(wagon, null, null),
+                UserName = user.FirstName,
+                StationsListItems = stationsListItems,
                 StartingStationName = route.StartingStation.Station.Name,
                 LastStationName = route.LastStation.Station.Name,
-                StationsListItems = stationsListItems,
-                Price = _wagonLogic.GetPrice(wagon, null, null),
                 RouteNumber = route.Number,
-                WagonId = wagon.Id,
                 StartingStationRouteId = route.StartingStation.Id,
                 LastStationRouteId = route.LastStation.Id,
                 StartingStationId = route.StartingStation.Station.Id,
-                LastStationId = route.LastStation.Station.Id,
+                LastStationId = route.LastStation.Station.Id
             };
 
             return View(ticketViewModel);
@@ -172,13 +198,18 @@ namespace TrainBooking.Controllers
             Ticket ticket = new Ticket
             {
                 Id = ticketViewModel.Id,
+                PlaceNumber = ticketViewModel.PlaceNumber,
+                Price = ticketViewModel.Price,
                 StartingStationRoute = startingStation.Id,
                 LastStationRoute = lastStation.Id,
-                PlaceNumber = ticketViewModel.PlaceNumber,
                 User = user,
-                Wagon = wagon,
-                Price = ticketViewModel.Price
+                Wagon = wagon
             };
+
+            //Mapper.CreateMap<TicketViewModel, Ticket>()
+            //    .ForMember(x => x.StartingStationRoute, opt => startingStation.Id)
+            //    .ForMember(x => x.LastStationRoute, opt => lastStation.Id);
+
 
             _ticketLogic.AddTicket(ticket);
 

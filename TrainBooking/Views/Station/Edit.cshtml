@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Редактирование</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -24,13 +24,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Сохранить" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад", "Index")
 </div>
 
 @section Scripts {

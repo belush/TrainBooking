@@ -17,6 +17,7 @@ using TrainBooking.Models.RouteModels;
 using TrainBooking.Models.StationRouteModels;
 using TrainBooking.Models.WagonModels;
 using WebGrease.Css.Extensions;
+using AutoMapper;
 
 namespace TrainBooking.Controllers
 {
@@ -53,22 +54,32 @@ namespace TrainBooking.Controllers
 
             List<Ticket> tickets = _ticketLogic.GetTicketsList();
 
-            List<RouteViewModel> routeViewModels = routes.Select(r => new RouteViewModel
-            {
-                Id = r.Id,
-                Name = r.Name,
-                Number = r.Number,
-                DepatureDateTime = r.DepatureDateTime,
-                ArrivalDateTime = r.ArrivalDateTime,
-                StartingStation = r.StartingStation.Station.Name,
-                LastStation = r.LastStation.Station.Name,
-                WayStations = r.WayStations.ToList(),
-                //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()
-                //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum() - tickets.Where(t => t.Wagon.Route.Id == r.Id).Select(t => t.PlaceNumber).Count()
+            #region OLD MAPPING
+            //List<RouteViewModel> routeViewModels = routes.Select(r => new RouteViewModel
+            //{
+            //    Id = r.Id,
+            //    Name = r.Name,
+            //    Number = r.Number,
+            //    DepatureDateTime = r.DepatureDateTime,
+            //    ArrivalDateTime = r.ArrivalDateTime,
+            //    StartingStation = r.StartingStation.Station.Name,
+            //    LastStation = r.LastStation.Station.Name,
+            //    WayStations = r.WayStations.ToList(),
+            //    //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()
+            //    //EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum() - tickets.Where(t => t.Wagon.Route.Id == r.Id).Select(t => t.PlaceNumber).Count()
 
-                //ПРОВЕРИТЬ НА НОРМАЛЬНОСТЬ!!!!
-                EmptyPlaces = _routeLogic.GetEmptyPlacesCount(r, tickets)
-            }).ToList();
+            //    //ПРОВЕРИТЬ НА НОРМАЛЬНОСТЬ!!!!
+            //    EmptyPlaces = _routeLogic.GetEmptyPlacesCount(r, tickets)
+            //}).ToList();
+            #endregion
+
+            // !!!!
+            Mapper.CreateMap<Route, RouteViewModel>()
+                .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
+                .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
+                .ForMember(x => x.WayStations, opt => opt.MapFrom(src => src.WayStations.ToList()))
+                .ForMember(x => x.EmptyPlaces, opt => opt.MapFrom(src => _routeLogic.GetEmptyPlacesCount(src, tickets)));
+            var routeViewModels = Mapper.Map<List<Route>, List<RouteViewModel>>(routes);
 
             return PartialView(routeViewModels);
         }
@@ -78,19 +89,29 @@ namespace TrainBooking.Controllers
         {
             List<Route> routes = _routeLogic.GetRoutesList();
 
-            List<RouteViewModel> routeViewModels = routes.Select(r => new RouteViewModel()
-            {
-                Id = r.Id,
-                Name = r.Name,
-                Number = r.Number,
-                DepatureDateTime = r.DepatureDateTime,
-                ArrivalDateTime = r.ArrivalDateTime,
-                StartingStation = r.StartingStation.Station.Name,
-                LastStation = r.LastStation.Station.Name,
-                WayStations = r.WayStations.ToList(),
-                EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum(),
-                Price = r.FullPrice
-            }).ToList();
+            #region OLD MAPPING
+            //List<RouteViewModel> routeViewModels = routes.Select(r => new RouteViewModel()
+            //{
+            //    Id = r.Id,
+            //    Name = r.Name,
+            //    Number = r.Number,
+            //    DepatureDateTime = r.DepatureDateTime,
+            //    ArrivalDateTime = r.ArrivalDateTime,
+            //    StartingStation = r.StartingStation.Station.Name,
+            //    LastStation = r.LastStation.Station.Name,
+            //    WayStations = r.WayStations.ToList(),
+            //    EmptyPlaces = r.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum(),
+            //    Price = r.FullPrice
+            //}).ToList();
+            #endregion
+
+            Mapper.CreateMap<Route, RouteViewModel>()
+                .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
+                .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
+                .ForMember(x => x.WayStations, opt => opt.MapFrom(src => src.WayStations.ToList()))
+                .ForMember(x => x.EmptyPlaces, opt => opt.MapFrom(src => src.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()))
+                .ForMember(x => x.Price, opt => opt.MapFrom(src => src.FullPrice));
+            var routeViewModels = Mapper.Map<List<Route>, List<RouteViewModel>>(routes);
 
             return View(routeViewModels);
         }
@@ -98,24 +119,39 @@ namespace TrainBooking.Controllers
 
         public ActionResult Report()
         {
-            List<ScheduleViewModel> scheduleViewModels = new List<ScheduleViewModel>();
-
             List<Ticket> tickets = _ticketLogic.GetTicketsList();
 
             IEnumerable<string> routeNames = tickets.Select(t => t.Wagon.Route.Name).Distinct();
 
-            foreach (string routeName in routeNames)
+            List<ScheduleViewModel> scheduleViewModels = routeNames.Select(routeName => new ScheduleViewModel
             {
-                scheduleViewModels.Add(new ScheduleViewModel
-                {
-                    Name = routeName,
-                    Count = tickets.Count(t => t.Wagon.Route.Name == routeName),
-                    FullPrice = tickets.Where(t => t.Wagon.Route.Name == routeName).Select(t => t.Price).Sum()
-                });
-            }
+                Name = routeName,
+                Count = tickets.Count(t => t.Wagon.Route.Name == routeName),
+                FullPrice = tickets.Where(t => t.Wagon.Route.Name == routeName).Select(t => t.Price).Sum()
+            }).ToList();
+
+
+            #region OLD CODE
+            //List<ScheduleViewModel> scheduleViewModels = new List<ScheduleViewModel>();
+
+            //List<Ticket> tickets = _ticketLogic.GetTicketsList();
+
+            //IEnumerable<string> routeNames = tickets.Select(t => t.Wagon.Route.Name).Distinct();
+
+            //foreach (string routeName in routeNames)
+            //{
+            //    scheduleViewModels.Add(new ScheduleViewModel
+            //    {
+            //        Name = routeName,
+            //        Count = tickets.Count(t => t.Wagon.Route.Name == routeName),
+            //        FullPrice = tickets.Where(t => t.Wagon.Route.Name == routeName).Select(t => t.Price).Sum()
+            //    });
+            //}
+            #endregion
 
             scheduleViewModels = scheduleViewModels.OrderByDescending(s => s.Count).ToList();
 
+            #region OLD CODE
             //foreach (Ticket ticket in tickets)
             //{
             //    scheduleViewModels.Add(new ScheduleViewModel
@@ -132,6 +168,7 @@ namespace TrainBooking.Controllers
             //{
             //    StationsListItems = _stationLogic.GetStationsListItems()
             //};
+            #endregion
 
             return View(scheduleViewModels);
         }
@@ -175,19 +212,32 @@ namespace TrainBooking.Controllers
                 Station = last
             };
 
-            Route route = new Route
-            {
-                Id = routeAddViewModel.Id,
-                Name = routeAddViewModel.Name,
-                Number = routeAddViewModel.Number,
-                StartingStation = startingStation,
-                LastStation = lastStation,
-                DepatureDateTime = routeAddViewModel.DepatureDate.AddHours(routeAddViewModel.DepatureTime.Hours)
-                    .AddMinutes(routeAddViewModel.DepatureTime.Minutes),
-                ArrivalDateTime = routeAddViewModel.ArrivalDate.AddHours(routeAddViewModel.ArrivalTime.Hours)
-                    .AddMinutes(routeAddViewModel.ArrivalTime.Minutes),
-                FullPrice = routeAddViewModel.Price
-            };
+            #region OLD CODE
+            //Route route = new Route
+            //{
+            //    Id = routeAddViewModel.Id,
+            //    Name = routeAddViewModel.Name,
+            //    Number = routeAddViewModel.Number,
+            //    DepatureDateTime = routeAddViewModel.DepatureDate.AddHours(routeAddViewModel.DepatureTime.Hours)
+            //        .AddMinutes(routeAddViewModel.DepatureTime.Minutes),
+            //    ArrivalDateTime = routeAddViewModel.ArrivalDate.AddHours(routeAddViewModel.ArrivalTime.Hours)
+            //        .AddMinutes(routeAddViewModel.ArrivalTime.Minutes),
+            //    FullPrice = routeAddViewModel.Price,
+            //    StartingStation = startingStation,
+            //    LastStation = lastStation,
+            //};
+            #endregion
+
+            Mapper.CreateMap<RouteAddViewModel, Route>()
+                .ForMember(x => x.DepatureDateTime, o => o.MapFrom(s => s.DepatureDate.AddHours(s.DepatureTime.Hours)
+                    .AddMinutes(s.DepatureTime.Minutes)))
+                .ForMember(x => x.ArrivalDateTime, o => o.MapFrom(s => s.ArrivalDate.AddHours(s.ArrivalTime.Hours)
+                    .AddMinutes(s.ArrivalTime.Minutes)))
+                //CAN MINIMIZE BY RENAME FULLPRICE TO PRICE
+                .ForMember(x => x.FullPrice, o => o.MapFrom(s => s.Price))
+                .ForMember(x => x.StartingStation, o => o.MapFrom(s => startingStation))
+                .ForMember(x => x.LastStation, o => o.MapFrom(s => lastStation));
+            var route = Mapper.Map<RouteAddViewModel, Route>(routeAddViewModel);
 
             _routeLogic.AddRoute(route);
 
@@ -197,6 +247,8 @@ namespace TrainBooking.Controllers
         public ActionResult Edit(int id)
         {
             Route route = _routeLogic.GetRouteById(id);
+
+            #region OLD MAPPING
             RouteAddViewModel routeEditViewModel = new RouteAddViewModel
             {
                 Id = route.Id,
@@ -212,6 +264,20 @@ namespace TrainBooking.Controllers
                 ArrivalTime = new TimeSpan(0, route.ArrivalDateTime.Hour, route.ArrivalDateTime.Minute, 0),
                 StationsListItems = _stationLogic.GetStationsListItems()
             };
+            #endregion
+
+            //Mapper.CreateMap<Route, RouteAddViewModel>()
+            //   .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
+            //   .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
+            //   .ForMember(x => x.StartingStationRoute, opt => opt.MapFrom(src => src.StartingStation.Id))
+            //   .ForMember(x => x.LastStationRoute, opt => opt.MapFrom(src => src.LastStation.Id))
+            //   .ForMember(x => x.DepatureDate, opt => opt.MapFrom(src => src.DepatureDateTime.Date))
+            //   .ForMember(x => x.DepatureTime, opt => opt.MapFrom(src => new TimeSpan(0, src.DepatureDateTime.Hour, src.DepatureDateTime.Minute, 0)))
+            //    .ForMember(x => x.ArrivalDate, opt => opt.MapFrom(src => src.ArrivalDateTime))
+            //   .ForMember(x => x.ArrivalTime, opt => opt.MapFrom(src => new TimeSpan(0, src.ArrivalDateTime.Hour, src.ArrivalDateTime.Minute, 0)))
+            //   .ForMember(x => x.StationsListItems, opt => opt.MapFrom(src => _stationLogic.GetStationsListItems()));
+
+            //var routeEditViewModel = Mapper.Map<Route, RouteAddViewModel>(route);
 
             return View(routeEditViewModel);
         }

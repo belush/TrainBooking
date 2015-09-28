@@ -21,7 +21,7 @@ namespace TrainBooking.BL.Logic.Implementations
             _wagonRepository = wagonRepository;
         }
 
-        public double GetPrice(Wagon wagon, int? startingStationId = 0, int? lastStationId = 0)
+        public double GetPrice(Wagon wagon, int? startingStationId, int? lastStationId)
         {
             double price = (wagon.Route.FullPrice);
             double q1 = 1;

@@ -12,6 +12,7 @@ using TrainBooking.DAL.Repositories;
 using TrainBooking.DAL.Repositories.Implementations;
 using TrainBooking.Models;
 using TrainBooking.Models.StationRouteModels;
+using AutoMapper;
 
 namespace TrainBooking.Controllers
 {
@@ -33,20 +34,31 @@ namespace TrainBooking.Controllers
 
         public ActionResult Index()
         {
-            var stationRouteViewModels = _stationRouteLogic.GetStationRoutesList()
-                .Select(sr => new StationRouteViewModel()
-                {
-                    Id = sr.Id,
-                    StationName = sr.Station.Name,
-                    ArrivalDateTime = sr.ArrivalDateTime,
-                    DepatureDateTime = sr.DepatureDateTime
-                }).ToList();
+            #region OLD MAPPING
+            //var stationRouteViewModels = _stationRouteLogic.GetStationRoutesList()
+            //    .Select(sr => new StationRouteViewModel()
+            //    {
+            //        Id = sr.Id,
+            //        StationName = sr.Station.Name,
+            //        ArrivalDateTime = sr.ArrivalDateTime,
+            //        DepatureDateTime = sr.DepatureDateTime
+            //    }).ToList();
+            #endregion
+
+            var stationRoutelist = _stationRouteLogic.GetStationRoutesList();
+
+            Mapper.CreateMap<StationRoute, StationRouteViewModel>()
+                .ForMember(x => x.StationName, opt => opt.MapFrom(src => src.Station.Name));
+            var stationRouteViewModels = Mapper.Map<List<StationRoute>, List<StationRouteViewModel>>(stationRoutelist);
 
             return View(stationRouteViewModels);
         }
 
         public ActionResult Create(int routeId)
         {
+            //
+            // MAPPING ???
+            //
             var stationRouteAddViewModel = new StationRouteAddViewModel
             {
                 RouteId = routeId,
@@ -77,6 +89,11 @@ namespace TrainBooking.Controllers
                 ArrivalDateTime = stationRouteAddViewModel.ArrivalDate
                     .Add(stationRouteAddViewModel.ArrivalTime)
             };
+
+            // ???????
+            //Mapper.CreateMap<StationRouteAddViewModel, StationRoute>()
+            //    .ForMember(x => x.Station, opt => opt.MapFrom(station))
+            //    .ForMember(x => x.DepatureDateTime, opt => opt.MapFrom());
 
             route.WayStations.Add(stationRoute);
             _routeLogic.EditRoute(route);
