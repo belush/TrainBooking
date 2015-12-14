@@ -73,13 +73,16 @@ namespace TrainBooking.Controllers
             //}).ToList();
             #endregion
 
-            // !!!!
+            //ToDo: finish GetEmptyPlacesCount 
             Mapper.CreateMap<Route, RouteViewModel>()
-                .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
-                .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
-                .ForMember(x => x.WayStations, opt => opt.MapFrom(src => src.WayStations.ToList()))
-                .ForMember(x => x.EmptyPlaces, opt => opt.MapFrom(src => _routeLogic.GetEmptyPlacesCount(src, tickets)));
+              .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
+              .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
+              .ForMember(x => x.WayStations, opt => opt.MapFrom(src => src.WayStations.ToList()))
+              .ForMember(x => x.EmptyPlaces, opt => opt.MapFrom(src => _routeLogic.GetEmptyPlacesCount(src, tickets)));
+
             var routeViewModels = Mapper.Map<List<Route>, List<RouteViewModel>>(routes);
+
+
 
             return PartialView(routeViewModels);
         }
@@ -105,12 +108,13 @@ namespace TrainBooking.Controllers
             //}).ToList();
             #endregion
 
-            Mapper.CreateMap<Route, RouteViewModel>()
-                .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
-                .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
-                .ForMember(x => x.WayStations, opt => opt.MapFrom(src => src.WayStations.ToList()))
-                .ForMember(x => x.EmptyPlaces, opt => opt.MapFrom(src => src.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()))
-                .ForMember(x => x.Price, opt => opt.MapFrom(src => src.FullPrice));
+            //Mapper.CreateMap<Route, RouteViewModel>()
+            //    .ForMember(x => x.StartingStation, opt => opt.MapFrom(src => src.StartingStation.Station.Name))
+            //    .ForMember(x => x.LastStation, opt => opt.MapFrom(src => src.LastStation.Station.Name))
+            //    .ForMember(x => x.WayStations, opt => opt.MapFrom(src => src.WayStations.ToList()))
+            //    .ForMember(x => x.EmptyPlaces, opt => opt.MapFrom(src => src.Wagons.Select(w => w.WagonType.NumberOfPlaces).Sum()))
+            //    .ForMember(x => x.Price, opt => opt.MapFrom(src => src.FullPrice));
+
             var routeViewModels = Mapper.Map<List<Route>, List<RouteViewModel>>(routes);
 
             return View(routeViewModels);
@@ -228,6 +232,7 @@ namespace TrainBooking.Controllers
             //};
             #endregion
 
+            //ToDo: move setting startingStation, lastStation from Mapper to controller
             Mapper.CreateMap<RouteAddViewModel, Route>()
                 .ForMember(x => x.DepatureDateTime, o => o.MapFrom(s => s.DepatureDate.AddHours(s.DepatureTime.Hours)
                     .AddMinutes(s.DepatureTime.Minutes)))
@@ -237,6 +242,7 @@ namespace TrainBooking.Controllers
                 .ForMember(x => x.FullPrice, o => o.MapFrom(s => s.Price))
                 .ForMember(x => x.StartingStation, o => o.MapFrom(s => startingStation))
                 .ForMember(x => x.LastStation, o => o.MapFrom(s => lastStation));
+
             var route = Mapper.Map<RouteAddViewModel, Route>(routeAddViewModel);
 
             _routeLogic.AddRoute(route);
@@ -249,6 +255,9 @@ namespace TrainBooking.Controllers
             Route route = _routeLogic.GetRouteById(id);
 
             #region OLD MAPPING
+
+            //ToDo: move automapper
+            //ToDo: bootswatch google
             RouteAddViewModel routeEditViewModel = new RouteAddViewModel
             {
                 Id = route.Id,

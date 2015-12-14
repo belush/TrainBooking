@@ -6,8 +6,8 @@
 
 <h2>Отчет</h2>
 
-<table>
-    <tr>
+<table class="table table-striped table-hover table-condensed">
+    <tr class="row">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -21,7 +21,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="row">
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>

@@ -1,6 +1,6 @@
 ﻿@model TrainBooking.Models.LocalPasswordModel
 @{
-    ViewBag.Title = "Manage Account";
+    ViewBag.Title = "Управление аккаунтом";
 }
 
 <hgroup class="title">
@@ -9,7 +9,7 @@
 
 <p class="message-success">@ViewBag.StatusMessage</p>
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+<p>Вы вошли как <strong>@User.Identity.Name</strong>.</p>
 
 @if (ViewBag.HasLocalPassword)
 {
@@ -20,12 +20,12 @@ else
     @Html.Partial("_SetPasswordPartial")
 }
 
-<section id="externalLogins">
+@*<section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
 
     <h3>Add an external login</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+</section>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

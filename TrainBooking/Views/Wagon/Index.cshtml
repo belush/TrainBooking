@@ -13,27 +13,17 @@
 
 <div>
     @using (Ajax.BeginForm("RouteChoose", new AjaxOptions { UpdateTargetId = "results" }))
-{
-        @*<text>Откуда</text>*@
-    @*<input type="text" name="startingStationId" style="width: 200px"/>*@
+    {
+        <fieldset>
+            Откуда
+            @Html.DropDownList("startingStationId", ViewData["stations"] as List<SelectListItem>)
+            - Куда
+            @Html.DropDownList("lastStationId", ViewData["stations"] as List<SelectListItem>)
 
-    <fieldset>
-        Откуда
-        @Html.DropDownList("startingStationId", ViewData["stations"] as List<SelectListItem>)
-    @*</fieldset>
-    <fieldset>*@
-        - Куда
-       @Html.DropDownList("lastStationId", ViewData["stations"] as List<SelectListItem>)
-  
-        <input type="submit" value="Фильтровать" />
-    </fieldset>
-    @*<input type="text" name="lastStationId" style="width: 200px" />*@
-    @*<input type="text" name="startingStationId" />*@
-           
-}
+            <input type="submit" class="btn btn-info" value="Фильтровать" />
+        </fieldset>
+    }
     <div id="results"></div>
-
-    @*@Html.Action("RouteChoose")*@
 </div>
 
 

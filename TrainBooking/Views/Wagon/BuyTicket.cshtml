@@ -11,7 +11,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>TicketViewModel</legend>
+        <legend></legend>
 
         @Html.HiddenFor(model => model.Id)
 
@@ -79,13 +79,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Купить" />
+            <input type="submit" class="btn btn-info"  value="Купить" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад", "Index")
 </div>
 
 @section Scripts {

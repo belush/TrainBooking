@@ -16,18 +16,18 @@
 
 <div>
     @using (Ajax.BeginForm("RouteSearch", new AjaxOptions { UpdateTargetId = "results" }))
-    {
+{
+    <div style="background: #F1F1F1">
         <text>Откуда</text>
-        <input type="text" name="startingStationName" style="width: 200px"/>
+        <input type="text" name="startingStationName" style="width: 200px; margin-bottom: 0px; " />
         <text> - Куда</text>
-        <input type="text" name="lastStationName" style="width: 200px"/>
+        <input type="text" name="lastStationName" style="width: 200px; margin-bottom: 0px; " />
         <text>Отправление</text>
-    <input 
-           type="date" name="startingDateTime" style="width:150px">
-        <input type="submit" value="Поиск" />
-    }
-    <div id="results"></div>
-    @*@Html.Action("RouteSearch")*@
+        <input type="date" name="startingDateTime" style="width: 150px; margin-bottom: 0px; ">
+        <input type="submit" class="btn btn-info" value="Поиск" />
+    </div>
+}
+    <div id="results">@Html.Action("RouteSearch")</div>
 </div>
 
 @section Scripts {

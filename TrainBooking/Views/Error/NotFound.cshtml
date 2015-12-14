@@ -1,0 +1,13 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<hgroup class="title">
+    <h2>404.</h2>
+    <h2>Страница не найдена</h2>
+</hgroup>
+<div>
+    @Html.ActionLink("Вернуться к маршрутам", "Index", "Route")
+</div>

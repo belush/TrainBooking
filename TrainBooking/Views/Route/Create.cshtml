@@ -8,10 +8,10 @@
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(false)
 
     <fieldset>
-        <legend>RouteAddViewModel</legend>
+        @*<legend>RouteAddViewModel</legend>*@
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Number)
