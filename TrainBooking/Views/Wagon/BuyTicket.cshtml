@@ -6,80 +6,158 @@
 
 <h2>Покупка билета</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+
+
+    @*<fieldset>
+            <legend></legend>
+
+            @Html.HiddenFor(model => model.Id)
+            <table>
+                <tr>
+                    <td>@Html.LabelFor(model => model.RouteNumber)</td>
+                    <td><b>@Html.DisplayFor(model => model.RouteNumber)</b></td>
+
+
+                    <div class="editor-label">
+
+                    </div>
+                    <div class="editor-field">
+
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.StartingStationName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.StartingStationName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.LastStationName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.LastStationName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.WagonNumber)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.WagonNumber)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PlaceNumber)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.PlaceNumber)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.UserName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.UserName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Price)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.Price)
+                    </div>
+
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.Price)
+                    </div>
+
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.StartingStationRouteId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.LastStationRouteId)
+                    </div>
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.WagonId)
+                    </div>
+                </tr>
+            </table>
+            <p>
+                <input type="submit" class="btn btn-info" value="Купить" />
+            </p>
+        </fieldset>*@
 
     <fieldset>
         <legend></legend>
 
         @Html.HiddenFor(model => model.Id)
+        <table>
+            <tr>
+                <td>@Html.LabelFor(model => model.RouteNumber)</td>
+                <td><b>@Html.DisplayFor(model => model.RouteNumber)</b></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.StartingStationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.StartingStationName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.LastStationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.LastStationName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.WagonNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.WagonNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PlaceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.PlaceNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Price)
+                </td>
+            </tr>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RouteNumber)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.RouteNumber)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartingStationName)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.StartingStationName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastStationName)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.LastStationName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.WagonNumber)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.WagonNumber)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PlaceNumber)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.PlaceNumber)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.UserName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.Price)
-        </div>
-
-        <div class="editor-field">
             @Html.HiddenFor(model => model.Price)
-        </div>
-       
-        <div class="editor-field">
-            @Html.HiddenFor(model => model.StartingStationRouteId)
-        </div>
-        <div class="editor-field">
-            @Html.HiddenFor(model => model.LastStationRouteId)
-        </div>
-        <div class="editor-field">
-            @Html.HiddenFor(model => model.WagonId)
-        </div>
 
+            @Html.HiddenFor(model => model.StartingStationRouteId)
+            @Html.HiddenFor(model => model.LastStationRouteId)
+            @Html.HiddenFor(model => model.WagonId)
+
+        </table>
         <p>
-            <input type="submit" class="btn btn-info"  value="Купить" />
+            <input type="submit" class="btn btn-info" value="Купить" />
         </p>
     </fieldset>
 }

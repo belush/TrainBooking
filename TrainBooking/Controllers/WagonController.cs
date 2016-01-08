@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -69,19 +71,45 @@ namespace TrainBooking.Controllers
             stations.AddRange(stationsSecond);
 
             List<SelectListItem> stationsListItems = stations.
-             Select(s => new SelectListItem()
-             {
-                 Text = s.Name,
-                 Value = s.Id.ToString()
-             }).ToList();
+                Select(s => new SelectListItem()
+                {
+                    Text = s.Name,
+                    Value = s.Id.ToString()
+                }).ToList();
 
-            //
-            // ADD THE FILELD FOR SELECTED LIST ITEM
-            //
-            ViewData["stations"] = stationsListItems;
+            List<SelectListItem> stationsListItemsLast = stations.
+                Select(s => new SelectListItem()
+                {
+                    Text = s.Name,
+                    Value = s.Id.ToString()
+                }).ToList();
+
+            int lastStationId = _routeLogic.GetRouteById(id).LastStation.Station.Id;
+
+            foreach (SelectListItem item in stationsListItemsLast)
+            {
+
+                if (item.Value == lastStationId.ToString())
+                {
+                    item.Selected = true;
+                }
+            }
+
+            ViewData["stationsFirst"] = stationsListItems;
+            ViewData["stationsLast"] = stationsListItemsLast;
+
+            ViewBag.FirstStationId = stations.First().Id;
+            ViewBag.LastStationId = lastStationId.ToString();
 
             return View(wagonViewModels);
         }
+
+        public class Product
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+
 
 
         public ActionResult RouteChoose(int startingStationId = 0, int lastStationId = 0)
@@ -99,19 +127,6 @@ namespace TrainBooking.Controllers
                 EmptyPlaces = new List<int>()
             }).ToList();
             #endregion
-
-            //Wagon wagon = wagons.Last();
-            //Mapper.CreateMap<Wagon, WagonViewModel>()
-            //    .ForMember(x => x.PricePerPlace, opt =>
-            //    {
-            //        _wagonLogic.GetPrice(opt, startingStationId, lastStationId);
-            //    })
-            //    .ForMember(x => x.EmptyPlaces, opt =>
-            //    {
-            //        new List<int>();
-            //    });
-            //var wagonViewModels = Mapper.Map<List<Wagon>, List<WagonViewModel>>(wagons);
-
 
             List<Ticket> tickets = _ticketLogic.GetTicketsList();
 
@@ -140,7 +155,15 @@ namespace TrainBooking.Controllers
                     tickets.Where(t => t.Wagon.Id == wagonViewModel.Id).Select(t => t.PlaceNumber).ToList();
             }
 
-            return PartialView(wagonViewModels);
+            if (wagonViewModels.Count > 0)
+            {
+                return PartialView(wagonViewModels);
+            }
+            else
+            {
+                return PartialView("NoWagons");
+            }
+
         }
 
 
@@ -213,12 +236,25 @@ namespace TrainBooking.Controllers
 
             _ticketLogic.AddTicket(ticket);
 
-            return RedirectToAction("BuySucces");
+            return RedirectToAction("BuySucces", new { ticketId = ticket.Id });
         }
 
-        public ActionResult BuySucces()
+        public ActionResult DownloadTicket(int ticketId)
         {
-            return View();
+            string filePathDirectory = _ticketLogic.GetFilePathForTicket();
+
+            string contentType = _ticketLogic.GetContentType();
+            string downloadName = _ticketLogic.GetDownloadName(ticketId);
+            string fullFilePath = Server.MapPath(filePathDirectory);
+
+            _ticketLogic.WriteTicket(ticketId, fullFilePath);
+
+            return File(fullFilePath, contentType, downloadName);
+        }
+
+        public ActionResult BuySucces(int ticketId)
+        {
+            return View(ticketId);
         }
     }
 }

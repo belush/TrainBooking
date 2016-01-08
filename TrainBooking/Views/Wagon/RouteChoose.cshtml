@@ -4,7 +4,7 @@
 
 <div id="choosehresults">
 
-    <h3>Все вагоны: @*@Model.First()*@</h3>
+    <h3>Все вагоны:</h3>
 
     <table>
         <tr>
@@ -42,10 +42,10 @@
                             {
                                 if ((i % 10) == 0)
                                 {
-                                    <tr></tr>
+                                <tr></tr>
                                 }
-                                
-                                if (item.EmptyPlaces.Contains(i+1))
+
+                                if (item.EmptyPlaces.Contains(i + 1))
                                 {
                                     <td>
                                         @(i + 1)
@@ -58,12 +58,13 @@
                                     </td>
                                 }
                             }
-                    </tr>
-                </table>
+                </tr>
+            </table>
+
             </td>
             <td>
                 <br />
-              
+
             </td>
             </tr>
         }

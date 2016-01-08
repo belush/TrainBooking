@@ -298,6 +298,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\Ticket.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -404,6 +405,7 @@
     <Content Include="Views\Shared\_BootstrapLayout.narrow.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.empty.cshtml" />
     <Content Include="Views\Shared\_alerts.cshtml" />
+    <Content Include="Views\Wagon\NoWagons.cshtml" />
     <None Include="Views\Wagon\RouteChoose.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

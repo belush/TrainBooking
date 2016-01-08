@@ -12,5 +12,9 @@ namespace TrainBooking.BL.Logic.Interfaces
         List<Ticket> GetTicketsList();
         Ticket GetTicketById(int id);
         void AddTicket(Ticket ticket);
+        string GetFilePathForTicket();
+        void WriteTicket(int ticketId, string filePath);
+        string GetContentType();
+        string GetDownloadName(int ticketNumber);
     }
 }

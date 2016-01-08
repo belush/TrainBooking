@@ -16,14 +16,18 @@
     {
         <fieldset>
             Откуда
-            @Html.DropDownList("startingStationId", ViewData["stations"] as List<SelectListItem>)
+            @Html.DropDownList("startingStationId", ViewData["stationsFirst"] as List<SelectListItem>)
+            @*@Html.DropDownList("FirstStation")*@
             - Куда
-            @Html.DropDownList("lastStationId", ViewData["stations"] as List<SelectListItem>)
+            @* @Html.DropDownList("lastStationId", ViewData["stations"] as List<SelectListItem>)*@
+            @Html.DropDownList("lastStationId", ViewData["stationsLast"] as List<SelectListItem>)
 
             <input type="submit" class="btn btn-info" value="Фильтровать" />
         </fieldset>
     }
-    <div id="results"></div>
+    <div id="results">
+        @Html.Action("RouteChoose", new { startingStationId = ViewBag.FirstStationId, lastStationId =ViewBag.LastStationId})
+    </div>
 </div>
 
 
