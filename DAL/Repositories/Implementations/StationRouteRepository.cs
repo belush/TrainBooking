@@ -14,6 +14,11 @@ namespace TrainBooking.DAL.Repositories.Implementations
             return db.StationRoutes.ToList();
         }
 
+        public StationRoute GetStationRouteById(int id)
+        {
+            return db.StationRoutes.FirstOrDefault(s => s.Id == id);
+        }
+
         public void AddStationRoute(StationRoute stationRoute)
         {
             db.StationRoutes.Add(stationRoute);

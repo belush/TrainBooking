@@ -19,6 +19,11 @@ namespace TrainBooking.DAL.Repositories.Implementations
             db.SaveChanges();
         }
 
+        public Station GetStationById(int id)
+        {
+            return db.Stations.FirstOrDefault(s => s.Id == id);
+        }
+
         public void DeleteStation(Station station)
         {
             db.Stations.Remove(station);

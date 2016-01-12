@@ -13,6 +13,11 @@ namespace TrainBooking.DAL.Repositories.Implementations
             return db.WagonTypes.ToList();
         }
 
+        public WagonType GetWagonTypeById(int id)
+        {
+            return db.WagonTypes.FirstOrDefault(w=>w.Id==id);
+        }
+
         public void AddWagonType(WagonType wagonType)
         {
             db.WagonTypes.Add(wagonType);

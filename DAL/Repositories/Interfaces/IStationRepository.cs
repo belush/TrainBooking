@@ -7,6 +7,7 @@ namespace TrainBooking.DAL.Repositories.Interfaces
     {
         List<Station> GetStations();
         void AddStation(Station route);
+        Station GetStationById(int id);
         void DeleteStation(Station route);
         void EditStation(Station route);
     }

@@ -40,7 +40,7 @@ namespace TrainBooking.BL.Logic.Implementations
 
         public WagonType GetWagonTypeById(int id)
         {
-            return _wagonTypeRepository.GetWagonTypes().First(w => w.Id == id);
+            return _wagonTypeRepository.GetWagonTypeById(id);
         }
 
         public void DeleteWagonTypeById(int id)

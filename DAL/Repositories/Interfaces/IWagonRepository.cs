@@ -6,5 +6,6 @@ namespace TrainBooking.DAL.Repositories.Interfaces
     public interface IWagonRepository
     {
         List<Wagon> GetWagons();
+        Wagon GetWagonById(int id);
     }
 }

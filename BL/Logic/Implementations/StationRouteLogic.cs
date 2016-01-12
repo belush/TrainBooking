@@ -25,7 +25,7 @@ namespace TrainBooking.BL.Logic.Implementations
 
         public StationRoute GetStationRouteById(int id)
         {
-            return _repository.GetStationRoutes().First(s => s.Id == id);
+            return _repository.GetStationRouteById(id);
         }
 
         public void DeleteStationRouteById(int id)

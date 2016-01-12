@@ -32,7 +32,6 @@ namespace TrainBooking.BL.Logic
 
         public List<SelectListItem> GetStationsListItemsByRouteId(int routeId)
         {
-
             List<SelectListItem> stationsListItems = GetStationsList().
                 Select(s => new SelectListItem()
                 {
@@ -51,7 +50,7 @@ namespace TrainBooking.BL.Logic
 
         public Station GetStationById(int id)
         {
-            Station station = _repository.GetStations().First(s => s.Id == id);
+            Station station = _repository.GetStationById(id);
             return station;
         }
 

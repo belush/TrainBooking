@@ -16,5 +16,10 @@ namespace TrainBooking.DAL.Repositories.Implementations
         {
             return db.User.ToList();
         }
+
+        public User GetUserById(int id)
+        {
+            return db.User.FirstOrDefault(u => u.UserId == id);
+        }
     }
 }

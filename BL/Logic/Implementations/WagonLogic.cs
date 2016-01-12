@@ -74,8 +74,7 @@ namespace TrainBooking.BL.Logic.Implementations
 
         public Wagon GetWagonById(int id)
         {
-            var wagon = GetWagonList().First(w => w.Id == id);
-            return wagon;
+            return _wagonRepository.GetWagonById(id);
         }
     }
 }

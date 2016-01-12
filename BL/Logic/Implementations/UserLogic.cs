@@ -22,7 +22,7 @@ namespace TrainBooking.BL.Logic.Implementations
 
         public User GetUserById(int id)
         {
-            return _userRepository.GetUsers().First(u => u.UserId == id);
+            return _userRepository.GetUserById(id);
         }
     }
 }

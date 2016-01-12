@@ -16,15 +16,17 @@ namespace TrainBooking.BL.Logic.Implementations
             _repository = repository;
         }
 
+
+        //todo: check if it is need
         public List<Route> GetRoutesList()
         {
-            List<Route> routes = _repository.GetRoutes();
+            List<Route> routes = _repository.GetRoutes().ToList();
             return routes;
         }
 
         public Route GetRouteById(int id)
         {
-            Route route = _repository.GetRoutes().First(r => r.Id == id);
+            Route route = _repository.GetRouteById(id);
             return route;
         }
 
@@ -77,38 +79,37 @@ namespace TrainBooking.BL.Logic.Implementations
             ////    routes = routes.Where(r => r.LastStationRoute.Station.Name.Contains(lastStationName)).ToList();
             ////}
             #endregion
-            var routes = GetRoutesList();
+
+            List<Route> routes = null;
 
             startingStationName = startingStationName.ToLower();
             lastStationName = lastStationName.ToLower();
 
             if (startingDateTime.HasValue)
             {
-                routes = routes.Where(r => r.DepatureDateTime.Date == startingDateTime).ToList();
+                routes = _repository.GetRoutesByDepatureDate(startingDateTime).ToList();
 
                 if (!string.IsNullOrWhiteSpace(startingStationName))
                 {
                     List<Route> newRoutes =
-                        GetRoutesList()
-                            .Where(r => r.WayStations.Any(w => (w.ArrivalDateTime.Date == startingDateTime) &&
-                                (w.Station.Name.ToLower().StartsWith(startingStationName))))
-                            .ToList();
+                        _repository.GetRoutesByDateAndStationName(startingDateTime, startingStationName).ToList();
+
                     routes.AddRange(newRoutes);
                 }
             }
 
             if (!string.IsNullOrWhiteSpace(startingStationName))
             {
-                routes = routes.Where(r => (r.StartingStation.Station.Name.ToLower().StartsWith(startingStationName)) ||
-                                     (r.WayStations.Any(w => w.Station.Name.ToLower().StartsWith(startingStationName)))).ToList();
+                routes = _repository.GetRoutesWithStartStationName(startingStationName).ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(lastStationName))
             {
-                routes = routes.Where(r => (r.LastStation.Station.Name.ToLower().StartsWith(lastStationName)) ||
-                                     (r.WayStations.Any(w => w.Station.Name.ToLower().StartsWith(lastStationName)))).ToList();
+                routes = _repository.GetRoutesWithLastStationName(lastStationName).ToList();
             }
 
+
+            //TODO: wach and remake or remove
             if (!string.IsNullOrWhiteSpace(startingStationName) && !string.IsNullOrWhiteSpace(lastStationName))
             {
                 #region first version

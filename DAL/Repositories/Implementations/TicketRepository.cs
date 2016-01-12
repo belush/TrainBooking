@@ -12,6 +12,11 @@ namespace TrainBooking.DAL.Repositories.Implementations
             return db.Tickets.ToList();
         }
 
+        public Ticket GetTicketById(int id)
+        {
+            return db.Tickets.FirstOrDefault(t => t.Id == id);
+        }
+
         public void AddTicket(Ticket ticket)
         {
             db.Tickets.Add(ticket);

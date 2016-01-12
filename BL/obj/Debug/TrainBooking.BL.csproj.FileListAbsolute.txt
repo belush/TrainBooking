@@ -14,3 +14,28 @@ C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 +
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\obj\Debug\TrainBooking.BL.csprojResolveAssemblyReference.cache
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\obj\Debug\BL.dll
 C:\Users\Евгений\Documents\Visual Studio 2013\Projects\TrainBooking - 3 + validation\BL\obj\Debug\BL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\BL.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\BL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\DAL.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.Mvc.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\EntityFramework.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.Razor.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.WebPages.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\DAL.pdb
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.Mvc.xml
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.Razor.xml
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.WebPages.xml
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\Microsoft.Web.Infrastructure.xml
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\ru\System.Web.Mvc.resources.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\ru\System.Web.Razor.resources.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\ru\System.Web.WebPages.Razor.resources.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\ru\System.Web.WebPages.resources.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\bin\Debug\ru\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\obj\Debug\TrainBooking.BL.csprojResolveAssemblyReference.cache
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\obj\Debug\BL.dll
+C:\Users\Евгений\Documents\Visual Studio 2015\GitHub\TrainBooking\BL\obj\Debug\BL.pdb

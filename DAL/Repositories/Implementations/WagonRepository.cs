@@ -16,5 +16,10 @@ namespace TrainBooking.DAL.Repositories.Implementations
         {
             return db.Wagons.ToList();
         }
+
+        public Wagon GetWagonById(int id)
+        {
+            return db.Wagons.FirstOrDefault(w => w.Id == id);
+        }
     }
 }

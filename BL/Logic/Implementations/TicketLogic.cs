@@ -26,7 +26,7 @@ namespace TrainBooking.BL.Logic.Implementations
 
         public Ticket GetTicketById(int id)
         {
-            return GetTicketsList().First(t => t.Id == id);
+            return _ticketRepository.GetTicketById(id);
         }
 
         public void AddTicket(Ticket ticket)
